@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="author" content="V/S Furniture" />
+    <link rel="shortcut icon" href="https://www.vs.de/assets/favicons/favicon.ico" />
+    <meta name="description" content="Shift+ Thumbprint - Convex Table Details" />
+    <meta name="keywords" content="furniture, table, convex, adjustable, VS" />
+
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+    <link href="css/tiny-slider.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'vs-green': '#3d5c4d',
+                        'vs-yellow': '#ffbb23',
+                        'vs-gray': '#f5f5f5',
+                        'vs-dark-gray': '#2c2c2c',
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .product-image {
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+        
+        .download-btn {
+            background-color: #ffbb23;
+            color: #000;
+            font-weight: 500;
+            padding: 12px 24px;
+            border: none;
+            transition: all 0.3s ease;
+        }
+        
+        .download-btn:hover {
+            background-color: #e6a520;
+            transform: translateY(-2px);
+        }
+        
+        .add-to-list {
+            color: #666;
+            font-size: 14px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .add-to-list:hover {
+            color: #000;
+            text-decoration: underline;
+        }
+        
+        .product-details-section {
+            background-color: #2c2c2c;
+            color: #fff;
+        }
+        
+        .product-title {
+            font-size: 48px;
+            font-weight: 400;
+            color: #333;
+            margin-bottom: 16px;
+        }
+        
+        .product-subtitle {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 32px;
+            line-height: 1.5;
+        }
+        
+        .model-title {
+            color: #ffbb23;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        
+        .convex-title {
+            font-size: 32px;
+            font-weight: 400;
+            margin-bottom: 24px;
+        }
+        
+        .product-description {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+        
+        .features-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .features-list li {
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 16px;
+        }
+        
+        .features-list li:before {
+            content: "•";
+            color: #ffbb23;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        /* Resources Section Styles */
+        .resources-section {
+            background-color: #f8f9fa;
+        }
+        
+        .resource-card {
+            transition: all 0.3s ease;
+            border: 1px solid #e9ecef;
+            height: 100%;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-color: #ffbb23;
+        }
+        
+        .resource-image {
+            background: linear-gradient(135deg, #f5f5f5 0%, #e9ecef 100%);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .resource-title {
+            color: #2c2c2c;
+            font-weight: 500;
+        }
+        
+        .resource-description {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            .resources-section {
+                padding: 48px 0;
+            }
+            
+            .resource-card {
+                margin-bottom: 24px;
+            }
+        }
+    </style>
+    
+    <title>Shift+ Thumbprint - Product Details | V/S Furniture</title>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header py-4 bg-white border-b border-gray-100">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="header__logo text-black font-bold text-2xl tracking-wider">
+                <a href="index.html">
+                    <img src="./image/vs-logo-2.svg" alt="V/S Logo" class="h-8 w-auto">
+                </a>
+            </div>
+            <nav class="header__nav hidden md:flex items-center gap-8">
+                <a href="index.html#what-we-do" class="text-gray-700 hover:text-black transition-colors font-medium">solutions</a>
+                <a href="product.html" class="text-gray-700 hover:text-black transition-colors font-medium">Products</a>
+                <a href="shop.html" class="text-gray-700 hover:text-black transition-colors font-medium">services</a>
+                <a href="index.html#projects" class="text-gray-700 hover:text-black transition-colors font-medium">Our story</a>
+                <a href="contact.html" class="text-gray-700 hover:text-black transition-colors font-medium">Contact</a>
+                <a href="career.html" class="text-gray-700 hover:text-black transition-colors font-medium">Career</a>
+            </nav>
+            <div class="header__icons hidden md:flex items-center gap-4">
+                <a href="#" aria-label="Favorites" class="text-gray-700 hover:text-black transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                    </svg>
+                </a>
+                <a href="#" aria-label="Search" class="text-gray-700 hover:text-black transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Mobile menu button -->
+            <button id="mobile-menu-toggle" class="md:hidden text-black focus:outline-none" aria-label="Toggle mobile menu">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+        
+        <!-- Mobile menu -->
+        <nav id="mobile-menu" class="header__nav-mobile hidden md:hidden bg-white px-4 pt-2 pb-4 space-y-2">
+            <a href="index.html#what-we-do" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">solutions</a>
+            <a href="product.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Products</a>
+            <a href="shop.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">services</a>
+            <a href="index.html#projects" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Our story</a>
+            <a href="contact.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Contact</a>
+            <a href="career.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Career</a>
+        </nav>
+    </header>
+
+    <!-- Main Product Section -->
+    <main class="bg-vs-gray">
+        <section class="py-16 md:py-24">
+            <div class="container mx-auto px-4">
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
+                    <!-- Left Side - Product Info -->
+                    <div class="order-2 lg:order-1">
+                        <h1 class="product-title">Shift+ Thumbprint</h1>
+                        <p class="product-subtitle">Available in 7 fixed heights or step height<br>adjustable 23.25" - 32.3"</p>
+                        
+                        <div class="space-y-4">
+                            <button class="download-btn">
+                                Download Cut Sheet
+                            </button>
+                            
+                            <div>
+                                <a href="#" class="add-to-list">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                    </svg>
+                                    Add to My List
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Side - Product Image -->
+                    <div class="order-1 lg:order-2 flex justify-center">
+                        <div class="max-w-lg">
+                            <img src="image/products/0765d0045f50b677905621765471213bae908e09.jpg" alt="Shift+ Thumbprint Convex Table" class="product-image w-full">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Details Section -->
+        <section class="product-details-section py-16 md:py-24">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl">
+                    <div class="model-title">Model: 01440</div>
+                    <h2 class="convex-title">Convex table</h2>
+                    
+                    <div class="product-description">
+                        The Shift+ ThumbPrint is a stackable 4-legged convex table. When paired with the coordinating Shift+ ThumbPrint concave table, it can be arranged into endless configurations – circles, ovals, or freely shaped groups – creating truly agile designs.
+                    </div>
+                    
+                    <ul class="features-list">
+                        <li>Frame made from welded steel with round steel legs</li>
+                        <li>Available in 7 fixed heights or step height adjustable with hexagon screw fastening, heights in accordance with DIN EN 1729</li>
+                        <li>Stackable up to 6, with stacking protection on the underside of the frame</li>
+                        <li>2 glides and 2 lockable casters or glides for hard floors, soft floors, or 2-component universal glides</li>
+                        <li>Available with a writable tabletop surface</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources Quick Links Section -->
+        <section class="resources-section py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl font-light text-center text-gray-800 mb-16">Resources Quick Links</h2>
+                
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Symbols & 3D Resources -->
+                    <div class="resource-card bg-gray-100 rounded-lg p-8 text-center">
+                        <div class="resource-image mb-6 h-48 flex items-center justify-center">
+                            <div class="w-full h-full bg-gray-200 rounded-lg flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400">
+                                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                                    <polyline points="3.27,6.96 12,12.01 20.73,6.96"/>
+                                    <line x1="12" y1="22.08" x2="12" y2="12"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="resource-title text-xl font-medium text-gray-800 mb-4">Symbols & 3D Resources</h3>
+                        <p class="resource-description text-gray-600 text-sm leading-relaxed">
+                            Explore our library of symbols and 3D resources to enhance your design and planning process, making it easier to visualize and customize learning spaces.
+                        </p>
+                    </div>
+
+                    <!-- Size Guides -->
+                    <div class="resource-card bg-gray-100 rounded-lg p-8 text-center">
+                        <div class="resource-image mb-6 h-48 flex items-center justify-center">
+                            <div class="w-full h-full bg-gray-200 rounded-lg flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <polyline points="12,6 12,12 16,14"/>
+                                    <path d="M4 4l16 16"/>
+                                    <path d="M16 8l4-4"/>
+                                    <path d="M20 8h-4"/>
+                                    <path d="M16 4v4"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="resource-title text-xl font-medium text-gray-800 mb-4">Size Guides</h3>
+                        <p class="resource-description text-gray-600 text-sm leading-relaxed">
+                            Ensuring the right fit matters – find the ideal seating and table sizes for every student with our size guides, ensuring comfort and focus in every space.
+                        </p>
+                    </div>
+
+                    <!-- Cut Sheet Library -->
+                    <div class="resource-card bg-gray-100 rounded-lg p-8 text-center">
+                        <div class="resource-image mb-6 h-48 flex items-center justify-center">
+                            <div class="w-full h-full bg-gray-200 rounded-lg flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="text-gray-400">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                    <polyline points="14,2 14,8 20,8"/>
+                                    <line x1="16" y1="13" x2="8" y2="13"/>
+                                    <line x1="16" y1="17" x2="8" y2="17"/>
+                                    <polyline points="10,9 9,9 8,9"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="resource-title text-xl font-medium text-gray-800 mb-4">Cut Sheet Library</h3>
+                        <p class="resource-description text-gray-600 text-sm leading-relaxed">
+                            Explore our product cut sheets featuring dimensions, model numbers, and technical specifications for detailed product information.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer bg-vs-dark-gray py-16 md:py-24 text-white">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="footer__column">
+                <h3 class="footer__heading mb-4 font-medium">FOLLOW OUR JOURNEY</h3>
+                <div class="footer__social flex space-x-4">
+                    <a href="#" aria-label="Instagram" class="footer__social-icon w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-gray-600 transition-colors">
+                        <i class="fab fa-instagram text-sm"></i>
+                    </a>
+                    <a href="#" aria-label="YouTube" class="footer__social-icon w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-gray-600 transition-colors">
+                        <i class="fab fa-youtube text-sm"></i>
+                    </a>
+                    <a href="#" aria-label="Facebook" class="footer__social-icon w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-gray-600 transition-colors">
+                        <i class="fab fa-facebook-f text-sm"></i>
+                    </a>
+                    <a href="#" aria-label="LinkedIn" class="footer__social-icon w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-gray-600 transition-colors">
+                        <i class="fab fa-linkedin-in text-sm"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="footer__column">
+                <h3 class="footer__heading mb-4 font-medium">CONTACT US</h3>
+                <div class="text-sm space-y-1">
+                    <p>Address:</p>
+                    <p>UNIT: Sharjah, Saifone</p>
+                    <p>Plot: J-08, Sharjah, Sultan Industrial Area</p>
+                    <p>Phone: +971 6 557 4000</p>
+                </div>
+            </div>
+            <div class="footer__column hidden lg:block"></div>
+            <div class="footer__column hidden lg:block"></div>
+        </div>
+        <div class="container mx-auto px-4 mt-12 text-center md:text-left">
+            <p class="footer__copyright text-sm text-gray-400">© Copyright 2023 V/S, All Rights Reserved</p>
+        </div>
+    </footer>
+    <!-- Footer -->
+     
+    <!-- Scripts -->
+    <script>
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function () {
+            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            mobileMenuToggle.addEventListener('click', function () {
+                const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+                mobileMenu.classList.toggle('hidden');
+                mobileMenuToggle.setAttribute('aria-expanded', !isExpanded);
+                mobileMenu.setAttribute('aria-hidden', isExpanded);
+            });
+
+            // Close mobile menu when a link is clicked
+            mobileMenu.querySelectorAll('a').forEach(item => {
+                item.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                    mobileMenu.setAttribute('aria-hidden', 'true');
+                });
+            });
+
+            // Close mobile menu on window resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth >= 768 && !mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                    mobileMenu.setAttribute('aria-hidden', 'true');
+                }
+            });
+        });
+
+        // Add to list functionality
+        document.querySelector('.add-to-list').addEventListener('click', function(e) {
+            e.preventDefault();
+            // Add your add to list functionality here
+            alert('Product added to your list!');
+        });
+    </script>
+</body>
+</html>

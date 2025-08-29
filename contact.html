@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact VS - Get in touch with our team for inquiries and support.">
+    <title>Contact - V/S</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z' fill='%23000'/%3E%3C/svg%3E" type="image/svg+xml">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'vs-dark-gray': '#2c2c2c',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --color-black: #000000;
+            --color-white: #FFFFFF;
+            --color-gray-text: #333333;
+            --color-yellow: #FFD700;
+        }
+        
+        body {
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            color: var(--color-black);
+            background-color: var(--color-white);
+            line-height: 1.5;
+        }
+        
+        .header__logo {
+            font-size: 3rem;
+            font-weight: bold;
+            line-height: 1;
+        }
+        
+        .header__nav-link {
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5rem;
+            padding: 0.5rem 0.75rem;
+            display: inline-block;
+        }
+        
+        .header__icon-link {
+            padding: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .mobile-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: var(--color-white);
+            z-index: 50;
+            border-top: 1px solid #eee;
+        }
+        
+        .mobile-menu a, .mobile-menu button {
+            display: block;
+            padding: 0.75rem 1rem;
+            text-align: center;
+            font-size: 1.125rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .mobile-menu a:last-child, .mobile-menu button:last-child {
+            border-bottom: none;
+        }
+        
+        .form-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .form-hidden {
+            display: none;
+        }
+        
+        .form-visible {
+            display: block;
+        }
+        
+        .form-field {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 0;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #FFD700;
+        }
+        
+        .form-textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 0;
+            font-size: 1rem;
+            min-height: 120px;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-textarea:focus {
+            outline: none;
+            border-color: #FFD700;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #64748b;
+        }
+        
+        .btn-primary {
+            background-color: #FFD700;
+            color: #000;
+            padding: 0.75rem 2rem;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: #F7C600;
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: #000;
+            padding: 0.75rem 2rem;
+            border: 2px solid #e2e8f0;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #f8f9fa;
+            border-color: #d1d5db;
+        }
+        
+        .btn-submit {
+            background-color: #e2e8f0;
+            color: #64748b;
+            padding: 0.75rem 2rem;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-submit:hover {
+            background-color: #d1d5db;
+        }
+        
+        .file-upload {
+            border: 2px dashed #e2e8f0;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.3s ease;
+        }
+        
+        .file-upload:hover {
+            border-color: #FFD700;
+        }
+        
+        .file-upload input[type="file"] {
+            display: none;
+        }
+        
+        /* Navbar Styles from index.html */
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #3b82f6;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu {
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.active {
+            transform: translateY(0);
+        }
+        
+        .icon-hover {
+            transition: transform 0.3s ease;
+        }
+        
+        .icon-hover:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+    <header class="header py-4 bg-white shadow-sm sticky top-0 z-50 w-full">
+        <div class="max-w-7xl mx-auto px-4 flex items-center justify-between">
+            <!-- Mobile menu toggle -->
+            <div class="flex items-center justify-between w-full md:hidden">
+                <div class="flex items-center space-x-2">
+                    <!-- Search Icon -->
+                    <a href="#" class="icon-hover text-gray-700 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg p-2" aria-label="Search">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </a>
+                    <!-- Favorite Icon -->
+                    <a href="#" class="icon-hover text-gray-700 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg p-2" aria-label="Favorite">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.329 1.176l1.519 4.674c.3.921-.755 1.688-1.539 1.176l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.512-1.839-.255-1.539-1.176l1.519-4.674a1 1 0 00-.329-1.176l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.95-.69l1.519-4.674z"></path>
+                        </svg>
+                    </a>
+                </div>
+                <!-- Hamburger -->
+                <button id="mobile-menu-toggle" class="text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg p-2" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="mobile-sidebar">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            <!-- Left Nav (hidden on mobile) -->
+            <nav class="hidden md:flex items-center gap-6 lg:gap-8 flex-1">
+                <a href="index.html#what-we-do" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Solutions</a>
+                <a href="product.html" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Products</a>
+                <a href="shop.html" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Services</a>
+            </nav>
+            <!-- Logo (centered on mobile, normal on desktop) -->
+            <div class="flex-1 flex justify-center md:justify-center">
+                <a href="index.html">
+                    <img src="./image/vs-logo-2.svg" alt="logo" class="w-10 h-10">
+                </a>
+            </div>
+            <!-- Right Nav (hidden on mobile) -->
+            <nav class="hidden md:flex items-center gap-6 lg:gap-8 flex-1 justify-end">
+                <a href="index.html#projects" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Our Story</a>
+                <a href="contact.html" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Contact</a>
+                <a href="career.html" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Career</a>
+                
+                <!-- Desktop Icons -->
+                <div class="flex items-center gap-4 ml-4">
+                    <a href="#" class="icon-hover text-gray-700 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg p-2" aria-label="Favorite">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.329 1.176l1.519 4.674c.3.921-.755 1.688-1.539 1.176l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.512-1.839-.255-1.539-1.176l1.519-4.674a1 1 0 00-.329-1.176l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.95-.69l1.519-4.674z"></path>
+                        </svg>
+                    </a>
+                    <a href="#" class="icon-hover text-gray-700 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg p-2" aria-label="Search">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </a>
+                </div>
+            </nav>
+        </div>
+
+        <!-- Sidebar Overlay and Sidebar -->
+        <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-40 z-40 hidden"></div>
+        <aside id="mobile-sidebar" class="fixed top-0 left-0 h-full w-64 bg-white shadow-lg z-50 transform -translate-x-full transition-transform duration-300 md:hidden flex flex-col pt-8 px-6 space-y-2">
+            <button id="close-sidebar" class="self-end mb-4 text-gray-700 hover:text-blue-600 focus:outline-none">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <a href="index.html#what-we-do" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">Solutions</a>
+            <a href="product.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">Products</a>
+            <a href="shop.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">Services</a>
+            <a href="index.html#projects" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">Our Story</a>
+            <a href="contact.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">Contact</a>
+            <a href="career.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">Career</a>
+        </aside>
+    </header>
+
+    <main class="min-h-screen bg-white">
+        <!-- Hero Section -->
+        <section id="hero-section" class="py-24 px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <h1 class="text-5xl md:text-6xl font-light text-gray-800 mb-6">
+                  <b> General Inquiry</b> <span class="italic">Contact Form</span>
+                </h1>
+                <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+                    For all general inquiries and questions for VS middle east, submit a form by clicking the button below
+                </p>
+                <button id="open-form-btn" class="btn-primary">
+                    Open form
+                </button>
+            </div>
+        </section>
+
+        <!-- Contact Form Section -->
+        <section id="form-section" class="form-hidden py-16 px-4 bg-gray-50">
+            <div class="form-container">
+                <h2 class="text-3xl font-medium text-gray-800 mb-8">General Inquiry Contact Form</h2>
+                
+                <form id="contact-form" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Left Column -->
+                    <div class="space-y-6">
+                        <div class="form-field">
+                            <label class="form-label" for="fullName">Full Name</label>
+                            <input type="text" id="fullName" name="fullName" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-field">
+                            <label class="form-label" for="email">Email</label>
+                            <input type="email" id="email" name="email" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-field">
+                            <label class="form-label" for="contactNumber">Contact Number</label>
+                            <input type="tel" id="contactNumber" name="contactNumber" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-field">
+                            <label class="form-label" for="questions">Questions to Spark Your Thinking</label>
+                            <input type="text" id="questions" name="questions" class="form-input">
+                        </div>
+                    </div>
+                    
+                    <!-- Right Column -->
+                    <div class="space-y-6">
+                        <div class="form-field">
+                            <label class="form-label" for="message">Message</label>
+                            <textarea id="message" name="message" class="form-textarea" rows="5"></textarea>
+                        </div>
+                        
+                        <div class="form-field">
+                            <label class="form-label">Uploads</label>
+                            <div class="file-upload">
+                                <input type="file" id="fileUpload" name="fileUpload" multiple>
+                                <label for="fileUpload" class="cursor-pointer">
+                                    <div class="text-gray-500">
+                                        <svg class="w-8 h-8 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                        </svg>
+                                        <span class="text-sm">Choose files</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Form Actions -->
+                    <div class="md:col-span-2 flex justify-between items-center pt-6">
+                        <button type="button" id="cancel-btn" class="btn-secondary">
+                            Cancel
+                        </button>
+                        <button type="submit" class="btn-submit">
+                            Submit
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Sidebar functionality
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const sidebar = document.getElementById('mobile-sidebar');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+        const closeSidebar = document.getElementById('close-sidebar');
+        
+        function openSidebar() {
+            sidebar.classList.remove('-translate-x-full');
+            sidebarOverlay.classList.remove('hidden');
+            mobileMenuToggle.setAttribute('aria-expanded', 'true');
+        }
+        function closeSidebarFn() {
+            sidebar.classList.add('-translate-x-full');
+            sidebarOverlay.classList.add('hidden');
+            mobileMenuToggle.setAttribute('aria-expanded', 'false');
+        }
+        mobileMenuToggle.addEventListener('click', openSidebar);
+        closeSidebar.addEventListener('click', closeSidebarFn);
+        sidebarOverlay.addEventListener('click', closeSidebarFn);
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    closeSidebarFn();
+                }
+            });
+        });
+        
+        // Add scroll effect to header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 50) {
+                header.classList.add('shadow-lg');
+            } else {
+                header.classList.remove('shadow-lg');
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // Form toggle functionality
+            const openFormBtn = document.getElementById('open-form-btn');
+            const cancelBtn = document.getElementById('cancel-btn');
+            const heroSection = document.getElementById('hero-section');
+            const formSection = document.getElementById('form-section');
+
+            openFormBtn.addEventListener('click', function() {
+                heroSection.style.display = 'none';
+                formSection.classList.remove('form-hidden');
+                formSection.classList.add('form-visible');
+                
+                // Scroll to form
+                formSection.scrollIntoView({ behavior: 'smooth' });
+            });
+
+            cancelBtn.addEventListener('click', function() {
+                formSection.classList.add('form-hidden');
+                formSection.classList.remove('form-visible');
+                heroSection.style.display = 'block';
+                
+                // Scroll to hero section
+                heroSection.scrollIntoView({ behavior: 'smooth' });
+            });
+
+            // Form submission
+            const contactForm = document.getElementById('contact-form');
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form data
+                const formData = new FormData(contactForm);
+                const data = Object.fromEntries(formData);
+                
+                // Simple form validation
+                if (!data.fullName || !data.email || !data.contactNumber) {
+                    alert('Please fill in all required fields.');
+                    return;
+                }
+                
+                // Here you would typically send the data to your server
+                console.log('Form submitted:', data);
+                alert('Thank you for your inquiry! We will get back to you soon.');
+                
+                // Reset form
+                contactForm.reset();
+                
+                // Return to hero section
+                formSection.classList.add('form-hidden');
+                formSection.classList.remove('form-visible');
+                heroSection.style.display = 'block';
+                heroSection.scrollIntoView({ behavior: 'smooth' });
+            });
+
+            // File upload display
+            const fileUpload = document.getElementById('fileUpload');
+            fileUpload.addEventListener('change', function(e) {
+                const files = e.target.files;
+                const fileUploadContainer = fileUpload.closest('.file-upload');
+                
+                if (files.length > 0) {
+                    const fileNames = Array.from(files).map(file => file.name).join(', ');
+                    fileUploadContainer.querySelector('label').innerHTML = `
+                        <div class="text-gray-700">
+                            <svg class="w-8 h-8 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            <span class="text-sm">${files.length} file(s) selected</span>
+                        </div>
+                    `;
+                }
+            });
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer class="footer bg-vs-dark-gray py-16 md:py-24 text-white">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="footer__column">
+                <h3 class="footer__heading mb-4 font-medium">FOLLOW OUR JOURNEY</h3>
+                <div class="footer__social flex space-x-4">
+                    <a href="#" aria-label="Instagram" class="footer__social-icon w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-gray-600 transition-colors">
+                        <i class="fab fa-instagram text-sm"></i>
+                    </a>
+                    <a href="#" aria-label="YouTube" class="footer__social-icon w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-gray-600 transition-colors">
+                        <i class="fab fa-youtube text-sm"></i>
+                    </a>
+                    <a href="#" aria-label="Facebook" class="footer__social-icon w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-gray-600 transition-colors">
+                        <i class="fab fa-facebook-f text-sm"></i>
+                    </a>
+                    <a href="#" aria-label="LinkedIn" class="footer__social-icon w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-gray-600 transition-colors">
+                        <i class="fab fa-linkedin-in text-sm"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="footer__column">
+                <h3 class="footer__heading mb-4 font-medium">CONTACT US</h3>
+                <div class="text-sm space-y-1">
+                    <p>Address:</p>
+                    <p>UNIT: Sharjah, Saifone</p>
+                    <p>Plot: J-08, Sharjah, Sultan Industrial Area</p>
+                    <p>Phone: +971 6 557 4000</p>
+                </div>
+            </div>
+            <div class="footer__column hidden lg:block"></div>
+            <div class="footer__column hidden lg:block"></div>
+        </div>
+        <div class="container mx-auto px-4 mt-12 text-center md:text-left">
+            <p class="footer__copyright text-sm text-gray-400">© Copyright 2023 V/S, All Rights Reserved</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Join VS - Explore career opportunities and grow with our innovative furniture design team.">
+    <title>Career - V/S</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z' fill='%23000'/%3E%3C/svg%3E" type="image/svg+xml">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'vs-dark-gray': '#2c2c2c',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        :root {
+            --color-black: #000000;
+            --color-white: #FFFFFF;
+            --color-gray-text: #333333;
+            --color-yellow: #FFD700;
+            --color-vs-green: #3d5c4d;
+            --color-vs-gray: #f5f5f5;
+            --color-vs-dark-gray: #2c2c2c;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--color-black);
+            background-color: var(--color-white);
+            line-height: 1.6;
+        }
+        
+        .header__logo {
+            font-size: 2rem;
+            font-weight: bold;
+            line-height: 1;
+            letter-spacing: 0.1em;
+        }
+        
+        .header__nav-link {
+            font-size: 1rem;
+            font-weight: 500;
+            line-height: 1.5rem;
+            padding: 0.5rem 0.75rem;
+            display: inline-block;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .header__nav-link:hover {
+            color: var(--color-vs-green);
+        }
+        
+        .header__nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--color-yellow);
+            transition: width 0.3s ease, left 0.3s ease;
+        }
+        
+        .header__nav-link:hover::after {
+            width: 100%;
+            left: 0;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--color-vs-gray) 0%, #e2e8f0 100%);
+            padding: 6rem 0;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 300;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: var(--color-gray-text);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.25rem;
+            font-weight: 400;
+            color: #64748b;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: var(--color-gray-text);
+            margin-bottom: 1rem;
+        }
+        
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: #64748b;
+            margin-bottom: 3rem;
+            max-width: 700px;
+        }
+        
+        .job-card {
+            background: white;
+            border-radius: 0;
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 4px solid var(--color-yellow);
+        }
+        
+        .job-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .job-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-gray-text);
+            margin-bottom: 0.5rem;
+        }
+        
+        .job-department {
+            font-size: 1rem;
+            color: var(--color-vs-green);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        
+        .job-location {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-bottom: 1rem;
+        }
+        
+        .job-description {
+            font-size: 1rem;
+            color: #64748b;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .benefit-card {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .benefit-icon {
+            font-size: 3rem;
+            color: var(--color-yellow);
+            margin-bottom: 1rem;
+        }
+        
+        .benefit-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--color-gray-text);
+            margin-bottom: 0.5rem;
+        }
+        
+        .benefit-description {
+            font-size: 1rem;
+            color: #64748b;
+            line-height: 1.5;
+        }
+        
+        .btn-primary {
+            background-color: var(--color-yellow);
+            color: var(--color-black);
+            padding: 0.75rem 2rem;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary:hover {
+            background-color: #F7C600;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--color-gray-text);
+            padding: 0.75rem 2rem;
+            border: 2px solid #e2e8f0;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #f8f9fa;
+            border-color: #d1d5db;
+        }
+        
+        .company-values {
+            background: var(--color-vs-dark-gray);
+            color: white;
+            padding: 6rem 0;
+        }
+        
+        .value-item {
+            margin-bottom: 2rem;
+        }
+        
+        .value-number {
+            font-size: 3rem;
+            font-weight: 300;
+            color: var(--color-yellow);
+            margin-bottom: 0.5rem;
+        }
+        
+        .value-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .value-description {
+            font-size: 1rem;
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+        
+        .footer {
+            background-color: var(--color-vs-dark-gray);
+            color: white;
+            padding: 4rem 0 2rem 0;
+        }
+        
+        .footer__heading {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+        }
+        
+        .footer__social-icon {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            background-color: #374151;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+        
+        .footer__social-icon:hover {
+            background-color: #4b5563;
+        }
+        
+        .footer__copyright {
+            font-size: 0.875rem;
+            color: #9ca3af;
+        }
+        
+        /* Navbar Styles from index.html */
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #3b82f6;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu {
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.active {
+            transform: translateY(0);
+        }
+        
+        .icon-hover {
+            transition: transform 0.3s ease;
+        }
+        
+        .icon-hover:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header py-4 bg-white shadow-sm sticky top-0 z-50 w-full">
+        <div class="max-w-7xl mx-auto px-4 flex items-center justify-between">
+            <!-- Mobile menu toggle -->
+            <div class="flex items-center justify-between w-full md:hidden">
+                <div class="flex items-center space-x-2">
+                    <!-- Search Icon -->
+                    <a href="#" class="icon-hover text-gray-700 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg p-2" aria-label="Search">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </a>
+                    <!-- Favorite Icon -->
+                    <a href="#" class="icon-hover text-gray-700 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg p-2" aria-label="Favorite">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.329 1.176l1.519 4.674c.3.921-.755 1.688-1.539 1.176l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.512-1.839-.255-1.539-1.176l1.519-4.674a1 1 0 00-.329-1.176l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.95-.69l1.519-4.674z"></path>
+                        </svg>
+                    </a>
+                </div>
+                <!-- Hamburger -->
+                <button id="mobile-menu-toggle" class="text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg p-2" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="mobile-sidebar">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            <!-- Left Nav (hidden on mobile) -->
+            <nav class="hidden md:flex items-center gap-6 lg:gap-8 flex-1">
+                <a href="index.html#what-we-do" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Solutions</a>
+                <a href="product.html" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Products</a>
+                <a href="shop.html" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Services</a>
+            </nav>
+            <!-- Logo (centered on mobile, normal on desktop) -->
+            <div class="flex-1 flex justify-center md:justify-center">
+                <a href="index.html">
+                    <img src="./image/vs-logo-2.svg" alt="logo" class="w-10 h-10">
+                </a>
+            </div>
+            <!-- Right Nav (hidden on mobile) -->
+            <nav class="hidden md:flex items-center gap-6 lg:gap-8 flex-1 justify-end">
+                <a href="index.html#projects" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Our Story</a>
+                <a href="contact.html" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Contact</a>
+                <a href="career.html" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Career</a>
+                
+                <!-- Desktop Icons -->
+                <div class="flex items-center gap-4 ml-4">
+                    <a href="#" class="icon-hover text-gray-700 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg p-2" aria-label="Favorite">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.329 1.176l1.519 4.674c.3.921-.755 1.688-1.539 1.176l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.512-1.839-.255-1.539-1.176l1.519-4.674a1 1 0 00-.329-1.176l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.95-.69l1.519-4.674z"></path>
+                        </svg>
+                    </a>
+                    <a href="#" class="icon-hover text-gray-700 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg p-2" aria-label="Search">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </a>
+                </div>
+            </nav>
+        </div>
+
+        <!-- Sidebar Overlay and Sidebar -->
+        <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-40 z-40 hidden"></div>
+        <aside id="mobile-sidebar" class="fixed top-0 left-0 h-full w-64 bg-white shadow-lg z-50 transform -translate-x-full transition-transform duration-300 md:hidden flex flex-col pt-8 px-6 space-y-2">
+            <button id="close-sidebar" class="self-end mb-4 text-gray-700 hover:text-blue-600 focus:outline-none">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <a href="index.html#what-we-do" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">Solutions</a>
+            <a href="product.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">Products</a>
+            <a href="shop.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">Services</a>
+            <a href="index.html#projects" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">Our Story</a>
+            <a href="contact.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">Contact</a>
+            <a href="career.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">Career</a>
+        </aside>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="hero-title">Join Our Team</h1>
+            <p class="hero-subtitle mx-auto">
+                Shape the future of furniture design with V/S. We're looking for passionate individuals who want to create innovative solutions for modern learning environments.
+            </p>
+            <a href="#jobs" class="btn-primary">View Open Positions</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="section-title">Why Work With V/S?</h2>
+                    <p class="section-subtitle">
+                        At V/S, we believe that great design comes from great people. Join our team of innovators, designers, and craftspeople who are passionate about creating furniture that transforms learning environments.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <div class="flex-shrink-0 w-2 h-2 bg-yellow-400 rounded-full mt-2"></div>
+                            <p class="text-gray-700">Innovative design projects that make a real impact</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="flex-shrink-0 w-2 h-2 bg-yellow-400 rounded-full mt-2"></div>
+                            <p class="text-gray-700">Collaborative environment with talented professionals</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="flex-shrink-0 w-2 h-2 bg-yellow-400 rounded-full mt-2"></div>
+                            <p class="text-gray-700">Opportunities for professional growth and development</p>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="flex-shrink-0 w-2 h-2 bg-yellow-400 rounded-full mt-2"></div>
+                            <p class="text-gray-700">Work on sustainable and environmentally conscious projects</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-center">
+                    <img src="image/FlipTable_global-hero_3_2.webp" alt="V/S Office Environment" class="rounded-lg shadow-lg max-w-full h-auto">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="section-title">Employee Benefits</h2>
+                <p class="section-subtitle mx-auto">
+                    We offer comprehensive benefits to support your professional and personal growth.
+                </p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h3 class="benefit-title">Health & Wellness</h3>
+                    <p class="benefit-description">
+                        Comprehensive health insurance, dental coverage, and wellness programs to keep you healthy.
+                    </p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="benefit-title">Learning & Development</h3>
+                    <p class="benefit-description">
+                        Professional development opportunities, training programs, and conference attendance.
+                    </p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3 class="benefit-title">Work-Life Balance</h3>
+                    <p class="benefit-description">
+                        Flexible working hours, remote work options, and generous paid time off policies.
+                    </p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-piggy-bank"></i>
+                    </div>
+                    <h3 class="benefit-title">Financial Security</h3>
+                    <p class="benefit-description">
+                        Competitive salary, performance bonuses, and retirement savings plans.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Company Values Section -->
+    <section class="company-values">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="section-title text-white">Our Values</h2>
+                <p class="section-subtitle text-gray-300 mx-auto">
+                    These core values guide everything we do at V/S and shape our company culture.
+                </p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="value-item">
+                    <div class="value-number">01</div>
+                    <h3 class="value-title">Innovation</h3>
+                    <p class="value-description">
+                        We constantly push boundaries to create furniture solutions that transform how people learn and work.
+                    </p>
+                </div>
+                <div class="value-item">
+                    <div class="value-number">02</div>
+                    <h3 class="value-title">Quality</h3>
+                    <p class="value-description">
+                        Excellence in craftsmanship and attention to detail are at the heart of everything we create.
+                    </p>
+                </div>
+                <div class="value-item">
+                    <div class="value-number">03</div>
+                    <h3 class="value-title">Sustainability</h3>
+                    <p class="value-description">
+                        We're committed to environmentally responsible practices and sustainable design solutions.
+                    </p>
+                </div>
+                <div class="value-item">
+                    <div class="value-number">04</div>
+                    <h3 class="value-title">Collaboration</h3>
+                    <p class="value-description">
+                        We believe the best ideas come from working together and valuing diverse perspectives.
+                    </p>
+                </div>
+                <div class="value-item">
+                    <div class="value-number">05</div>
+                    <h3 class="value-title">Customer Focus</h3>
+                    <p class="value-description">
+                        Understanding and exceeding our customers' needs drives every decision we make.
+                    </p>
+                </div>
+                <div class="value-item">
+                    <div class="value-number">06</div>
+                    <h3 class="value-title">Integrity</h3>
+                    <p class="value-description">
+                        We operate with honesty, transparency, and ethical business practices in all our relationships.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Open Positions Section -->
+    <section id="jobs" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="section-title">Open Positions</h2>
+                <p class="section-subtitle mx-auto">
+                    Discover exciting career opportunities and join our growing team.
+                </p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Job Card 1 -->
+                <div class="job-card">
+                    <div class="job-department">Design</div>
+                    <h3 class="job-title">Senior Product Designer</h3>
+                    <div class="job-location">
+                        <i class="fas fa-map-marker-alt mr-2"></i>
+                        Sharjah, UAE
+                    </div>
+                    <p class="job-description">
+                        Lead the design of innovative furniture solutions for educational environments. Work with cross-functional teams to create user-centered designs.
+                    </p>
+                    <a href="#" class="btn-primary">Apply Now</a>
+                </div>
+
+                <!-- Job Card 2 -->
+                <div class="job-card">
+                    <div class="job-department">Engineering</div>
+                    <h3 class="job-title">Manufacturing Engineer</h3>
+                    <div class="job-location">
+                        <i class="fas fa-map-marker-alt mr-2"></i>
+                        Sharjah, UAE
+                    </div>
+                    <p class="job-description">
+                        Optimize manufacturing processes and ensure quality standards. Collaborate with design teams to bring innovative products to market.
+                    </p>
+                    <a href="#" class="btn-primary">Apply Now</a>
+                </div>
+
+                <!-- Job Card 3 -->
+                <div class="job-card">
+                    <div class="job-department">Sales</div>
+                    <h3 class="job-title">Sales Manager</h3>
+                    <div class="job-location">
+                        <i class="fas fa-map-marker-alt mr-2"></i>
+                        Dubai, UAE
+                    </div>
+                    <p class="job-description">
+                        Drive sales growth and build relationships with educational institutions. Develop strategies to expand our market presence.
+                    </p>
+                    <a href="#" class="btn-primary">Apply Now</a>
+                </div>
+
+                <!-- Job Card 4 -->
+                <div class="job-card">
+                    <div class="job-department">Marketing</div>
+                    <h3 class="job-title">Digital Marketing Specialist</h3>
+                    <div class="job-location">
+                        <i class="fas fa-map-marker-alt mr-2"></i>
+                        Remote
+                    </div>
+                    <p class="job-description">
+                        Develop and execute digital marketing campaigns to promote our furniture solutions. Manage social media and online presence.
+                    </p>
+                    <a href="#" class="btn-primary">Apply Now</a>
+                </div>
+
+                <!-- Job Card 5 -->
+                <div class="job-card">
+                    <div class="job-department">Quality Assurance</div>
+                    <h3 class="job-title">Quality Control Manager</h3>
+                    <div class="job-location">
+                        <i class="fas fa-map-marker-alt mr-2"></i>
+                        Sharjah, UAE
+                    </div>
+                    <p class="job-description">
+                        Ensure all products meet our high-quality standards. Implement quality control processes and continuous improvement initiatives.
+                    </p>
+                    <a href="#" class="btn-primary">Apply Now</a>
+                </div>
+
+                <!-- Job Card 6 -->
+                <div class="job-card">
+                    <div class="job-department">Human Resources</div>
+                    <h3 class="job-title">HR Business Partner</h3>
+                    <div class="job-location">
+                        <i class="fas fa-map-marker-alt mr-2"></i>
+                        Sharjah, UAE
+                    </div>
+                    <p class="job-description">
+                        Support our growing team with recruitment, employee development, and HR operations. Foster a positive work culture.
+                    </p>
+                    <a href="#" class="btn-primary">Apply Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-light text-gray-800 mb-6">
+                Don't see the right position?
+            </h2>
+            <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+                We're always looking for talented individuals to join our team. Send us your resume and let us know how you'd like to contribute to V/S.
+            </p>
+            <a href="contact.html" class="btn-secondary">Contact Us</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer bg-vs-dark-gray py-16 md:py-24 text-white">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="footer__column">
+                <h3 class="footer__heading mb-4 font-medium">FOLLOW OUR JOURNEY</h3>
+                <div class="footer__social flex space-x-4">
+                    <a href="#" aria-label="Instagram" class="footer__social-icon w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-gray-600 transition-colors">
+                        <i class="fab fa-instagram text-sm"></i>
+                    </a>
+                    <a href="#" aria-label="YouTube" class="footer__social-icon w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-gray-600 transition-colors">
+                        <i class="fab fa-youtube text-sm"></i>
+                    </a>
+                    <a href="#" aria-label="Facebook" class="footer__social-icon w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-gray-600 transition-colors">
+                        <i class="fab fa-facebook-f text-sm"></i>
+                    </a>
+                    <a href="#" aria-label="LinkedIn" class="footer__social-icon w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-gray-600 transition-colors">
+                        <i class="fab fa-linkedin-in text-sm"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="footer__column">
+                <h3 class="footer__heading mb-4 font-medium">CONTACT US</h3>
+                <div class="text-sm space-y-1">
+                    <p>Address:</p>
+                    <p>UNIT: Sharjah, Saifone</p>
+                    <p>Plot: J-08, Sharjah, Sultan Industrial Area</p>
+                    <p>Phone: +971 6 557 4000</p>
+                </div>
+            </div>
+            <div class="footer__column hidden lg:block"></div>
+            <div class="footer__column hidden lg:block"></div>
+        </div>
+        <div class="container mx-auto px-4 mt-12 text-center md:text-left">
+            <p class="footer__copyright text-sm text-gray-400">© Copyright 2023 V/S, All Rights Reserved</p>
+        </div>
+    </footer>
+
+    <script>
+        // Sidebar functionality
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const sidebar = document.getElementById('mobile-sidebar');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+        const closeSidebar = document.getElementById('close-sidebar');
+        
+        function openSidebar() {
+            sidebar.classList.remove('-translate-x-full');
+            sidebarOverlay.classList.remove('hidden');
+            mobileMenuToggle.setAttribute('aria-expanded', 'true');
+        }
+        function closeSidebarFn() {
+            sidebar.classList.add('-translate-x-full');
+            sidebarOverlay.classList.add('hidden');
+            mobileMenuToggle.setAttribute('aria-expanded', 'false');
+        }
+        mobileMenuToggle.addEventListener('click', openSidebar);
+        closeSidebar.addEventListener('click', closeSidebarFn);
+        sidebarOverlay.addEventListener('click', closeSidebarFn);
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    closeSidebarFn();
+                }
+            });
+        });
+        // Add scroll effect to header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 50) {
+                header.classList.add('shadow-lg');
+            } else {
+                header.classList.remove('shadow-lg');
+            }
+        });
+    </script>
+</body>
+</html>

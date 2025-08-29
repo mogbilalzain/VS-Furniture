@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore our range of furniture solutions for modern spaces.">
+    <title>V/S - Furniture Solutions</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z' fill='%23000'/%3E%3C/svg%3E" type="image/svg+xml">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'vs-dark-gray': '#2c2c2c',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --color-black: #000000;
+            --color-white: #FFFFFF;
+            --color-gray-text: #333333; /* Approximate from image */
+        }
+        body {
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            color: var(--color-black);
+            background-color: var(--color-white);
+            line-height: 1.5; /* Default line height */
+        }
+        .text-black { color: var(--color-black); }
+        .text-gray-text { color: var(--color-gray-text); }
+        .hover\:underline:hover { text-decoration: underline; }
+        .focus\:outline-none:focus { outline: none; }
+        .focus\:ring:focus { --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color); --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(3px + var(--tw-ring-offset-width)) var(--tw-ring-color); box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow); }
+        .focus\:ring-gray-text:focus { --tw-ring-color: var(--color-gray-text); }
+        .focus\:ring-offset-2:focus { --tw-ring-offset-width: 2px; }
+        
+        /* Navbar Styles */
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #3b82f6;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .icon-hover {
+            transition: transform 0.3s ease;
+        }
+        
+        .icon-hover:hover {
+            transform: scale(1.1);
+        }
+
+         /* Custom style for potentially larger logo text */
+        .header__logo {
+            font-size: 3rem; /* Adjust as needed */
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .product-grid {
+             display: grid;
+             grid-template-columns: repeat(1, minmax(0, 1fr));
+             gap: 2rem; /* Adjust gap as needed */
+             justify-items: center;
+        }
+
+        @media (min-width: 768px) { /* md breakpoint */
+             .product-grid {
+                 grid-template-columns: repeat(2, minmax(0, 1fr));
+             }
+        }
+
+         @media (min-width: 1024px) { /* lg breakpoint */
+             .product-grid {
+                 grid-template-columns: repeat(3, minmax(0, 1fr));
+                 gap: 3rem 4rem; /* Adjust gap as needed */
+             }
+        }
+
+        .product-item__image {
+             width: 300px;
+             height: 200px;
+             object-fit: cover;
+             border-radius: 8px;
+        }
+
+         .product-item__label {
+             font-size: 1.125rem; /* text-lg */
+             font-weight: 400; /* normal */
+             line-height: 1.75rem; /* leading-7 */
+             margin-top: 0.5rem; /* mt-2 */
+             text-align: center; /* Center text below image */
+         }
+
+          /* Ensure header links have consistent styling and spacing */
+        .header__nav-link {
+            font-size: 1rem; /* text-base */
+            font-weight: 400; /* normal */
+            line-height: 1.5rem; /* leading-6 */
+            padding: 0.5rem 0.75rem; /* Add some padding for click area */
+            display: inline-block; /* Make padding work */
+        }
+
+         .header__icon-link {
+             padding: 0.5rem; /* Add padding for click area */
+             display: inline-flex;
+             align-items: center;
+             justify-content: center;
+         }
+
+         /* Mobile menu specific styles */
+         .mobile-menu {
+             position: absolute;
+             top: 100%; /* Position below header */
+             left: 0;
+             right: 0;
+             background-color: var(--color-white);
+             z-index: 50; /* Above other content */
+             border-top: 1px solid #eee; /* Optional separator */
+         }
+         .mobile-menu a, .mobile-menu button {
+             display: block;
+             padding: 0.75rem 1rem;
+             text-align: center;
+             font-size: 1.125rem;
+             border-bottom: 1px solid #eee;
+         }
+         .mobile-menu a:last-child, .mobile-menu button:last-child {
+             border-bottom: none;
+         }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <header class="header py-4 bg-white shadow-sm sticky top-0 z-50 w-full">
+        <div class="max-w-7xl mx-auto px-4 flex items-center justify-between">
+            <!-- Mobile menu toggle -->
+            <div class="flex items-center justify-between w-full md:hidden">
+                <div class="flex items-center space-x-2">
+                    <!-- Search Icon -->
+                    <a href="#" class="icon-hover text-gray-700 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg p-2" aria-label="Search">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </a>
+                    <!-- Favorite Icon -->
+                    <a href="#" class="icon-hover text-gray-700 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg p-2" aria-label="Favorite">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.329 1.176l1.519 4.674c.3.921-.755 1.688-1.539 1.176l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.512-1.839-.255-1.539-1.176l1.519-4.674a1 1 0 00-.329-1.176l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.95-.69l1.519-4.674z"></path>
+                        </svg>
+                    </a>
+                </div>
+                <!-- Hamburger -->
+                <button id="mobile-menu-toggle" class="text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg p-2" aria-label="Toggle mobile menu" aria-expanded="false" aria-controls="mobile-sidebar">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+            <!-- Left Nav (hidden on mobile) -->
+            <nav class="hidden md:flex items-center gap-6 lg:gap-8 flex-1">
+                <a href="index.html#what-we-do" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Solutions</a>
+                <a href="product.html" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Products</a>
+                <a href="shop.html" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Services</a>
+            </nav>
+            <!-- Logo (centered on mobile, normal on desktop) -->
+            <div class="flex-1 flex justify-center md:justify-center">
+                <a href="index.html">
+                    <img src="./image/vs-logo-2.svg" alt="logo" class="w-10 h-10">
+                </a>
+            </div>
+            <!-- Right Nav (hidden on mobile) -->
+            <nav class="hidden md:flex items-center gap-6 lg:gap-8 flex-1 justify-end">
+                <a href="index.html#projects" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Our Story</a>
+                <a href="contact.html" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Contact</a>
+                <a href="career.html" class="nav-link text-gray-700 hover:text-blue-600 font-medium">Career</a>
+                
+                <!-- Desktop Icons -->
+                <div class="flex items-center gap-4 ml-4">
+                    <a href="#" class="icon-hover text-gray-700 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg p-2" aria-label="Favorite">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.329 1.176l1.519 4.674c.3.921-.755 1.688-1.539 1.176l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.512-1.839-.255-1.539-1.176l1.519-4.674a1 1 0 00-.329-1.176l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.95-.69l1.519-4.674z"></path>
+                        </svg>
+                    </a>
+                    <a href="#" class="icon-hover text-gray-700 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg p-2" aria-label="Search">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </a>
+                </div>
+            </nav>
+        </div>
+
+        <!-- Sidebar Overlay and Sidebar -->
+        <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-40 z-40 hidden"></div>
+        <aside id="mobile-sidebar" class="fixed top-0 left-0 h-full w-64 bg-white shadow-lg z-50 transform -translate-x-full transition-transform duration-300 md:hidden flex flex-col pt-8 px-6 space-y-2">
+            <button id="close-sidebar" class="self-end mb-4 text-gray-700 hover:text-blue-600 focus:outline-none">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <a href="index.html#what-we-do" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">Solutions</a>
+            <a href="product.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">Products</a>
+            <a href="shop.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">Services</a>
+            <a href="index.html#projects" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">Our Story</a>
+            <a href="contact.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">Contact</a>
+            <a href="career.html" class="block px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg">Career</a>
+        </aside>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 md:py-12 lg:py-16">
+        <section class="product-grid">
+            <!-- Item 1 -->
+            <a href="shop.html" class="product-item block text-center focus:outline-none focus:ring focus:ring-gray-text focus:ring-offset-2">
+                <img src="image/products/8ffd4442eac7540d9e40306b504c8d664bc16fc6.jpg" alt="Three people collaborating at adjustable desks" class="product-item__image mx-auto">
+                <div class="product-item__label text-gray-text">Collections</div>
+            </a>
+            <!-- Item 2 -->
+            <a href="shop.html" class="product-item block text-center focus:outline-none focus:ring focus:ring-gray-text focus:ring-offset-2">
+                <img src="image/products/6dc110aef589e2ee723f2e76aacff47388bcf2b1.jpg" alt="Illustration of yellow chairs with abstract figures" class="product-item__image mx-auto">
+                <div class="product-item__label text-gray-text">Seating</div>
+            </a>
+            <!-- Item 3 -->
+            <a href="shop.html" class="product-item block text-center focus:outline-none focus:ring focus:ring-gray-text focus:ring-offset-2">
+                <img src="image/products/fffc899afa42622e7f314fd62c1e4b78582f94b4.jpg" alt="Green and gray modular sofa" class="product-item__image mx-auto">
+                <div class="product-item__label text-gray-text">Soft Seating</div>
+            </a>
+            <!-- Item 4 -->
+            <a href="shop.html" class="product-item block text-center focus:outline-none focus:ring focus:ring-gray-text focus:ring-offset-2">
+                <img src="image//products/30d20705cf9ed2b83a5045e2dbe72ef9e7ee550f.jpg" alt="Illustration of a desk with adjustable features and abstract figures" class="product-item__image mx-auto">
+                <div class="product-item__label text-gray-text">Tables & Desks</div>
+            </a>
+            <!-- Item 5 -->
+            <a href="image/products/bd38f61b2f37eeab76c3d79c6430f51f2f8e6fc5.jpg" class="product-item block text-center focus:outline-none focus:ring focus:ring-gray-text focus:ring-offset-2">
+                <img src="image//products//1964dd6348ef29eee0892a717a6a22d6200252f3.jpg" alt="White storage unit with green shelves on wheels" class="product-item__image mx-auto">
+                <div class="product-item__label text-gray-text">Storage</div>
+            </a>
+            <!-- Item 6 -->
+            <a href="shop.html" class="product-item block text-center focus:outline-none focus:ring focus:ring-gray-text focus:ring-offset-2">
+                <img src="image/products/bd38f61b2f37eeab76c3d79c6430f51f2f8e6fc5.jpg" alt="Hanging pod-like chair with yellow cushion" class="product-item__image mx-auto">
+                <div class="product-item__label text-gray-text">Floor-Level Learning</div>
+            </a>
+            <!-- Item 7 -->
+            <a href="shop.html" class="product-item block text-center focus:outline-none focus:ring focus:ring-gray-text focus:ring-offset-2">
+                <img src="image/products/55edf64cb17a7db8b928bfd9265562c54f68e195.jpg" alt="Two people using a mobile room divider whiteboard" class="product-item__image mx-auto">
+                <div class="product-item__label text-gray-text">Room Dividers</div>
+            </a>
+            <!-- Item 8 -->
+            <a href="shop.html" class="product-item block text-center focus:outline-none focus:ring focus:ring-gray-text focus:ring-offset-2">
+                <img src="image/products//3e0e5c762c9b57d6e4741f8f036691d769fc5dce.jpg" alt="Green whiteboard on a stand" class="product-item__image mx-auto">
+                <div class="product-item__label text-gray-text">Display Boards & Wall Panels</div>
+            </a>
+            <!-- Item 9 -->
+            <a href="shop.html" class="product-item block text-center focus:outline-none focus:ring focus:ring-gray-text focus:ring-offset-2">
+                <img src="image/products/0765d0045f50b677905621765471213bae908e09.jpg" alt="Bright green chair or stool" class="product-item__image mx-auto">
+                <div class="product-item__label text-gray-text">QuickShip Program</div>
+            </a>
+        </section>
+    </main>
+
+    <script>
+        // Sidebar functionality
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const sidebar = document.getElementById('mobile-sidebar');
+        const sidebarOverlay = document.getElementById('sidebar-overlay');
+        const closeSidebar = document.getElementById('close-sidebar');
+        
+        function openSidebar() {
+            sidebar.classList.remove('-translate-x-full');
+            sidebarOverlay.classList.remove('hidden');
+            mobileMenuToggle.setAttribute('aria-expanded', 'true');
+        }
+        function closeSidebarFn() {
+            sidebar.classList.add('-translate-x-full');
+            sidebarOverlay.classList.add('hidden');
+            mobileMenuToggle.setAttribute('aria-expanded', 'false');
+        }
+        mobileMenuToggle.addEventListener('click', openSidebar);
+        closeSidebar.addEventListener('click', closeSidebarFn);
+        sidebarOverlay.addEventListener('click', closeSidebarFn);
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    closeSidebarFn();
+                }
+            });
+        });
+        // Add scroll effect to header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 50) {
+                header.classList.add('shadow-lg');
+            } else {
+                header.classList.remove('shadow-lg');
+            }
+        });
+    </script>
+
+    <!-- Footer -->
+    <footer class="footer bg-vs-dark-gray py-16 md:py-24 text-white">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="footer__column">
+                <h3 class="footer__heading mb-4 font-medium">FOLLOW OUR JOURNEY</h3>
+                <div class="footer__social flex space-x-4">
+                    <a href="#" aria-label="Instagram" class="footer__social-icon w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-gray-600 transition-colors">
+                        <i class="fab fa-instagram text-sm"></i>
+                    </a>
+                    <a href="#" aria-label="YouTube" class="footer__social-icon w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-gray-600 transition-colors">
+                        <i class="fab fa-youtube text-sm"></i>
+                    </a>
+                    <a href="#" aria-label="Facebook" class="footer__social-icon w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-gray-600 transition-colors">
+                        <i class="fab fa-facebook-f text-sm"></i>
+                    </a>
+                    <a href="#" aria-label="LinkedIn" class="footer__social-icon w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center hover:bg-gray-600 transition-colors">
+                        <i class="fab fa-linkedin-in text-sm"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="footer__column">
+                <h3 class="footer__heading mb-4 font-medium">CONTACT US</h3>
+                <div class="text-sm space-y-1">
+                    <p>Address:</p>
+                    <p>UNIT: Sharjah, Saifone</p>
+                    <p>Plot: J-08, Sharjah, Sultan Industrial Area</p>
+                    <p>Phone: +971 6 557 4000</p>
+                </div>
+            </div>
+            <div class="footer__column hidden lg:block"></div>
+            <div class="footer__column hidden lg:block"></div>
+        </div>
+        <div class="container mx-auto px-4 mt-12 text-center md:text-left">
+            <p class="footer__copyright text-sm text-gray-400">© Copyright 2023 V/S, All Rights Reserved</p>
+        </div>
+    </footer>
+
+</body>
+</html>

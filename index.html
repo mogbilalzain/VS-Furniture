@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V/S - Modern Design</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'vs-dark-gray': '#2c2c2c',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 70vh;
+            overflow: hidden;
+        }
+        
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .content-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .hero-content {
+            text-align: center;
+            color: white;
+            max-width: 800px;
+            padding: 2rem;
+        }
+        
+        .section-content {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #3b82f6;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu {
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.active {
+            transform: translateY(0);
+        }
+        
+        .icon-hover {
+            transition: transform 0.3s ease;
+        }
+        
+        .icon-hover:hover {
+            transform: scale(1.1);
+        }
+    </style>
+    <style>
+        :root {
+            --color-black: #000000;
+            --color-white: #FFFFFF;
+            --color-dark-gray: #3D3D3D;
+            --color-light-gray: #E0E0E0;
+            --color-medium-gray: #707070; /* Used for some text/borders */
+        }
+        body {
+            /* font-family: 'Inter', sans-serif; */
+            font-family:'Georgia', serif !important;
+            color: var(--color-black);
+        }
+        .text-black { color: var(--color-black); }
+        .text-white { color: var(--color-white); }
+        .text-dark-gray { color: var(--color-dark-gray); }
+        .text-medium-gray { color: var(--color-medium-gray); }
+        .bg-white { background-color: var(--color-white); }
+        .bg-dark-gray { background-color: var(--color-dark-gray); }
+        .border-light-gray { border-color: var(--color-light-gray); }
+
+        /* Custom hover effects */
+        .link-hover-underline:hover {
+            text-decoration: underline;
+        }
+
+        /* BEM-like classes for structure */
+        .header {
+            border-bottom: 1px solid var(--color-light-gray);
+        }
+        .header__logo {
+            font-weight: 700; /* Bold */
+            font-size: 1.5rem; /* Adjust as needed */
+        }
+        .header__nav-link {
+            font-size: 0.9375rem; /* Approx 15px */
+            font-weight: 500; /* Medium */
+            line-height: 1.6; /* Approx 24px */
+            color: var(--color-black);
+        }
+        .what-we-do__heading {
+            font-size: 3rem; /* Approx 48px */
+            font-weight: 400; /* Regular */
+            line-height: 1.2;
+        }
+         .what-we-do__description {
+             font-size: 1rem; /* Approx 16px */
+             line-height: 1.5; /* Approx 24px */
+             color: var(--color-medium-gray);
+         }
+        .what-we-do__card-link {
+            font-size: 0.875rem; /* Approx 14px */
+            font-weight: 500;
+        }
+        .quote-section {
+             font-size: 1.875rem; /* Approx 30px */
+             font-style: italic;
+             font-weight: 400;
+             line-height: 1.4;
+        }
+        .trusted__heading {
+            font-size: 1.125rem; /* Approx 18px */
+            font-weight: 600; /* Semi-bold */
+            letter-spacing: 0.05em; /* Approx 0.8px */
+            color: var(--color-medium-gray);
+        }
+        .projects__heading {
+            font-size: 1.875rem; /* Approx 30px */
+            font-weight: 600;
+        }
+        .project-card__title {
+            font-size: 1rem; /* Approx 16px */
+            font-weight: 600;
+            line-height: 1.5;
+        }
+        .project-card__description {
+            font-size: 0.875rem; /* Approx 14px */
+            line-height: 1.5;
+            color: var(--color-medium-gray);
+        }
+         .real-spaces__heading {
+            font-size: 1.875rem; /* Approx 30px */
+            font-weight: 600;
+        }
+        .real-spaces__description {
+            font-size: 1rem; /* Approx 16px */
+             line-height: 1.5; /* Approx 24px */
+             color: var(--color-medium-gray);
+        }
+        .footer__heading {
+            font-size: 0.875rem; /* Approx 14px */
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: var(--color-white);
+        }
+        .footer__link,
+        .footer__address-text {
+            font-size: 0.875rem; /* Approx 14px */
+            line-height: 1.5;
+            color: var(--color-white);
+        }
+        .footer__social-icon {
+            width: 2rem; /* 32px */
+            height: 2rem; /* 32px */
+            border: 1px solid var(--color-medium-gray); /* Adjust border color */
+            color: var(--color-white);
+        }
+        .footer__copyright {
+            font-size: 0.875rem; /* Approx 14px */
+            color: var(--color-medium-gray);
+        }
+
+         /* Image placeholder styles for dark backgrounds */
+        .placeholder-dark {
+             background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+             color: rgba(255, 255, 255, 0.8); /* Semi-transparent white text */
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             font-size: 1rem;
+             text-align: center;
+        }
+
+         /* Specific adjustments */
+         .trusted-logos img {
+             /* filter: grayscale(100%); */
+              /* Make logos grayscale */
+             /* opacity: 0.6; */
+              /* Adjust opacity */
+             height: 40px; /* Adjust height as per design */
+             object-fit: contain;
+         }
+         .trusted-logos img.imaResize {
+             /* filter: grayscale(100%); */
+              /* Make logos grayscale */
+             /* opacity: 0.6; */
+              /* Adjust opacity */
+             height: 120px !important; /* Adjust height as per design */
+             object-fit: contain;
+         }
+
+         /* Horizontal scroll for Real Spaces */
+         .real-spaces__scroll-container {
+             overflow-x: auto;
+             scrollbar-width: none; /* Hide scrollbar for Firefox */
+             -ms-overflow-style: none;  /* Hide scrollbar for IE and Edge */
+         }
+         .real-spaces__scroll-container::-webkit-scrollbar {
+             display: none; /* Hide scrollbar for Chrome, Safari and Opera */
+         }
+
+         /* Trusted Logos Animation */
+         .trusted-logos-container {
+             overflow: hidden;
+             white-space: nowrap;
+             background: rgb(235 235 236);
+             padding: 50px 0;
+         }
+         
+         .trusted-logos-track {
+             display: inline-flex;
+             align-items: center;
+             animation: scroll 30s linear infinite;
+             gap: 4rem;
+         }
+         
+         .trusted-logos-track img {
+             flex-shrink: 0;
+             height: 40px;
+             object-fit: contain;
+             filter: grayscale(100%) opacity(0.7);
+             transition: all 0.3s ease;
+         }
+         
+         .trusted-logos-track img.imaResize {
+             height: 120px !important;
+         }
+         
+         .trusted-logos-track:hover {
+             animation-play-state: paused;
+         }
+         
+         .trusted-logos-track img:hover {
+             filter: grayscale(0%) opacity(1);
+             transform: scale(1.1);
+         }
+         
+         @keyframes scroll {
+             0% {
+                 transform: translateX(0);
+             }
+             100% {
+                 transform: translateX(-100%);
+             }
+         }
+    </style>
+</head>
+
+<body class="bg-white">
+
+    <!-- Hero Section with Video -->
+    <section class="hero-section relative min-h-screen flex items-center justify-center">
+        <div class="video-container min-h-screen">
+            <video autoplay muted loop playsinline poster="https://via.placeholder.com/1920x1080/f3f4f6/374151?text=Video+Placeholder">
+                <source src="https://media-vs.org/file/p1/mp4/VS2025_revised3.mp4" type="video/mp4">
+            </video>
+            <div class="content-overlay">
+                <div class="hero-content">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                         <span class="text-blue-400">       </span>
+                    </h1>
+                    <p class="text-xl md:text-2xl mb-8 font-light">
+                    </p>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+  
+</body>
+</html> 
