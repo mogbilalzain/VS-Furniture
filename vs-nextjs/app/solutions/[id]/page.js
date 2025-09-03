@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import Header from '../../../components/Header';
 import Footer from '../../../components/Footer';
+import EmblaCarousel from '../../../components/EmblaCarousel';
 import { config } from '../../../lib/config';
 
 const SolutionDetailsPage = () => {
@@ -90,13 +91,35 @@ const SolutionDetailsPage = () => {
     setShowLightbox(true);
   };
 
+  const handleCarouselImageClick = (image, index) => {
+    openLightbox(image, index);
+  };
+
   const closeLightbox = () => {
     setShowLightbox(false);
     setSelectedImage(null);
   };
 
+  // Keyboard navigation for lightbox
+  useEffect(() => {
+    if (!showLightbox) return;
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        closeLightbox();
+      } else if (event.key === 'ArrowLeft') {
+        prevImage();
+      } else if (event.key === 'ArrowRight') {
+        nextImage();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [showLightbox, solution?.images, currentImageIndex]);
+
   const nextImage = () => {
-    if (solution && solution.images) {
+    if (solution?.images && solution.images.length > 0) {
       const nextIndex = (currentImageIndex + 1) % solution.images.length;
       setCurrentImageIndex(nextIndex);
       setSelectedImage(solution.images[nextIndex]);
@@ -104,7 +127,7 @@ const SolutionDetailsPage = () => {
   };
 
   const prevImage = () => {
-    if (solution && solution.images) {
+    if (solution?.images && solution.images.length > 0) {
       const prevIndex = currentImageIndex === 0 ? solution.images.length - 1 : currentImageIndex - 1;
       setCurrentImageIndex(prevIndex);
       setSelectedImage(solution.images[prevIndex]);
@@ -112,7 +135,7 @@ const SolutionDetailsPage = () => {
   };
 
   const getSortedProducts = () => {
-    if (!solution || !solution.products) return [];
+    if (!solution?.products || !Array.isArray(solution.products)) return [];
     
     let filtered = solution.products;
     
@@ -137,9 +160,9 @@ const SolutionDetailsPage = () => {
   };
 
   const getUniqueCategories = () => {
-    if (!solution || !solution.products) return [];
+    if (!solution?.products || !Array.isArray(solution.products)) return [];
     const categories = solution.products
-      .map(product => product.category?.name)
+      .map(product => product?.category?.name)
       .filter(Boolean)
       .filter((category, index, self) => self.indexOf(category) === index);
     return categories;
@@ -185,7 +208,18 @@ const SolutionDetailsPage = () => {
   }
 
   if (!solution) {
-    return null;
+    return (
+      <>
+        <Header />
+        <div className="min-h-screen flex justify-center items-center">
+          <div className="text-center">
+            <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mb-4"></div>
+            <p className="text-gray-600">Loading solution details...</p>
+          </div>
+        </div>
+        <Footer />
+      </>
+    );
   }
 
   const sortedProducts = getSortedProducts();
@@ -215,7 +249,7 @@ const SolutionDetailsPage = () => {
         <section className="grid grid-cols-1 md:grid-cols-2 gap-10 px-10 py-16 items-center">
           {/* Left Text */}
           <div>
-            <span className="text-sm text-gray-500 border rounded-full px-3 py-1">Room Concept</span>
+            {/* <span className="text-sm text-gray-500 border rounded-full px-3 py-1">Room Concept</span> */}
             <h1 className="text-4xl font-light mt-6">{solution.title}</h1>
             <h2 className="text-4xl italic font-serif mt-2 text-gray-700">Solution Details</h2>
             
@@ -238,7 +272,7 @@ const SolutionDetailsPage = () => {
                 <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 002 2z" />
                 </svg>
-                {solution.images?.length || 0} Images
+                {solution?.images?.length || 0} Images
               </div>
             </div>
 
@@ -246,7 +280,7 @@ const SolutionDetailsPage = () => {
             <div className="mt-8">
               <Link 
                 href="/contact"
-                className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg text-lg font-medium transition-colors"
+                className="inline-block bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-8 py-4 text-lg font-medium transition-colors"
               >
                 Get Quote for This Solution
               </Link>
@@ -260,39 +294,26 @@ const SolutionDetailsPage = () => {
               alt={solution.title}
               width={600}
               height={400}
-              className="rounded-xl shadow-lg w-full h-auto object-cover"
+              className="rounded-xl  w-full h-auto object-cover"
               priority
             />
           </div>
         </section>
 
-        {/* Image Gallery */}
-        {solution.images && solution.images.length > 0 && (
-          <section className="mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8">Gallery</h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {solution.images.map((image, index) => (
-                <div 
-                  key={image.id || index}
-                  className="relative h-48 rounded-lg overflow-hidden cursor-pointer group shadow-md hover:shadow-xl transition-all duration-300"
-                  onClick={() => openLightbox(image, index)}
-                >
-                  <Image
-                    src={image.image_path}
-                    alt={image.alt_text || `Gallery image ${index + 1}`}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
-                    <svg className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
+        {/* Image Gallery - Embla Carousel */}
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold text-gray-900 mb-8">
+            Gallery {solution?.images && solution.images.length > 0 && (
+              <span className="text-lg font-normal text-gray-600">
+                ({solution.images.length} {solution.images.length === 1 ? 'Image' : 'Images'})
+              </span>
+            )}
+          </h2>
+          <EmblaCarousel 
+            images={solution?.images || []} 
+            onImageClick={handleCarouselImageClick}
+          />
+        </section>
 
         {/* Related Products */}
         {solution.products && solution.products.length > 0 && (
@@ -394,34 +415,43 @@ const SolutionDetailsPage = () => {
 
       {/* Lightbox */}
       {showLightbox && selectedImage && (
-        <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4">
-          <div className="relative max-w-4xl max-h-full">
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-95 z-50 flex items-center justify-center p-4"
+          onClick={closeLightbox}
+        >
+          <div 
+            className="relative max-w-6xl max-h-full w-full"
+            onClick={(e) => e.stopPropagation()}
+          >
             {/* Close Button */}
             <button
               onClick={closeLightbox}
-              className="absolute top-4 right-4 text-white hover:text-gray-300 z-10"
+              className="absolute top-4 right-4 text-white hover:text-gray-300 z-10 bg-black bg-opacity-50 rounded-full p-2 transition-all duration-200 hover:bg-opacity-70"
+              aria-label="Close lightbox"
             >
-              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
             
             {/* Navigation Buttons */}
-            {solution.images && solution.images.length > 1 && (
+            {solution?.images && solution.images.length > 1 && (
               <>
                 <button
                   onClick={prevImage}
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 z-10"
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 z-10 bg-black bg-opacity-50 rounded-full p-3 transition-all duration-200 hover:bg-opacity-70"
+                  aria-label="Previous image"
                 >
-                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                   </svg>
                 </button>
                 <button
                   onClick={nextImage}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 z-10"
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white hover:text-gray-300 z-10 bg-black bg-opacity-50 rounded-full p-3 transition-all duration-200 hover:bg-opacity-70"
+                  aria-label="Next image"
                 >
-                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
                 </button>
@@ -429,19 +459,32 @@ const SolutionDetailsPage = () => {
             )}
             
             {/* Image */}
-            <div className="relative w-full h-full max-h-[80vh]">
+            <div className="relative w-full h-full max-h-[80vh] min-h-[60vh]">
               <Image
-                src={selectedImage.image_path}
-                alt={selectedImage.alt_text || 'Gallery image'}
-                fill
-                className="object-contain"
+                src={selectedImage.image_path || selectedImage.image_url || '/images/placeholder-product.jpg'}
+                alt={selectedImage.alt_text || `Gallery image ${currentImageIndex + 1}`}
+                width={1200}
+                height={800}
+                className="object-contain w-full h-full"
+                priority
+                onError={(e) => {
+                  console.error('Image failed to load:', selectedImage);
+                  e.target.src = '/images/placeholder-product.jpg';
+                }}
               />
             </div>
             
             {/* Image Counter */}
-            {solution.images && solution.images.length > 1 && (
-              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white bg-black bg-opacity-50 px-3 py-1 rounded">
-                {currentImageIndex + 1} / {solution.images.length}
+            {solution?.images && solution.images.length > 1 && (
+              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-white bg-black bg-opacity-70 px-4 py-2 rounded-full text-sm font-medium">
+                {currentImageIndex + 1} / {solution?.images?.length || 0}
+              </div>
+            )}
+
+            {/* Image Title */}
+            {selectedImage && (selectedImage.alt_text || selectedImage.title) && (
+              <div className="absolute bottom-4 left-4 text-white bg-black bg-opacity-70 px-4 py-2 rounded-lg max-w-md">
+                <p className="text-sm font-medium">{selectedImage.alt_text || selectedImage.title}</p>
               </div>
             )}
           </div>

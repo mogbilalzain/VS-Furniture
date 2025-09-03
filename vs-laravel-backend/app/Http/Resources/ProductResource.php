@@ -33,6 +33,18 @@ class ProductResource extends JsonResource
             }),
             'category_name' => $this->category?->name,
             'image' => $this->image,
+            'images' => $this->whenLoaded('activeImages', function() {
+                return $this->activeImages->map(function($image) {
+                    return [
+                        'id' => $image->id,
+                        'image_url' => $image->full_image_url,
+                        'alt_text' => $image->alt_text,
+                        'title' => $image->title,
+                        'is_primary' => $image->is_primary,
+                        'sort_order' => $image->sort_order,
+                    ];
+                });
+            }),
             'status' => $this->status,
             'property_values' => $this->whenLoaded('propertyValues', function() {
                 return $this->propertyValues->map(function($propertyValue) {

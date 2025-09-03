@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { authStorage } from '../lib/localStorage-utils';
 
 /**
  * NotificationsBell Component for Admin Header
@@ -17,25 +18,53 @@ const NotificationsBell = ({ className = '' }) => {
   // Fetch unread count
   const fetchUnreadCount = async () => {
     try {
+      // Check if user is authenticated admin using authStorage
+      if (!authStorage.isAuthenticatedAdmin()) {
+        console.warn('⚠️ User not authenticated admin for unread count');
+        return;
+      }
+
+      // Get token using authStorage
+      const token = authStorage.getToken();
+      if (!token) {
+        console.warn('⚠️ No token found for unread count');
+        return;
+      }
+
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api'}/contact/unread-count`, {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('admin_token')}`,
+          'Authorization': `Bearer ${token}`,
         },
+        signal: controller.signal,
       });
+
+      clearTimeout(timeoutId);
 
       if (response.ok) {
         const data = await response.json();
         if (data.success) {
           setUnreadCount(data.data.count);
         }
+      } else if (response.status === 401) {
+        console.warn('⚠️ Unauthorized access to unread count - user may need to re-login');
+        setUnreadCount(0);
       }
     } catch (error) {
-      console.error('Error fetching unread count:', error);
-      // Fallback data for testing
-      setUnreadCount(3);
+      if (error.name === 'AbortError') {
+        console.warn('⚠️ Unread count request timed out');
+      } else {
+        console.error('Error fetching unread count:', error);
+      }
+      // Don't set fallback data in production - just keep current count
+      if (process.env.NODE_ENV === 'development') {
+        setUnreadCount(0);
+      }
     }
   };
 
@@ -45,52 +74,57 @@ const NotificationsBell = ({ className = '' }) => {
     
     setLoading(true);
     try {
+      // Check if user is authenticated admin using authStorage
+      if (!authStorage.isAuthenticatedAdmin()) {
+        console.warn('⚠️ User not authenticated admin for recent messages');
+        setLoading(false);
+        return;
+      }
+
+      // Get token using authStorage
+      const token = authStorage.getToken();
+      if (!token) {
+        console.warn('⚠️ No token found for recent messages');
+        setLoading(false);
+        return;
+      }
+
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api'}/contact/recent`, {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('admin_token')}`,
+          'Authorization': `Bearer ${token}`,
         },
+        signal: controller.signal,
       });
+
+      clearTimeout(timeoutId);
 
       if (response.ok) {
         const data = await response.json();
         if (data.success) {
           setRecentMessages(data.data);
         }
+      } else if (response.status === 401) {
+        console.warn('⚠️ Unauthorized access to recent messages - user may need to re-login');
+        setRecentMessages([]);
       } else {
         throw new Error('Failed to fetch messages');
       }
     } catch (error) {
-      console.error('Error fetching recent messages:', error);
-      // Fallback data for testing
-      setRecentMessages([
-        {
-          id: 1,
-          name: 'John Smith',
-          email: 'john@example.com',
-          subject: 'Office Furniture Inquiry',
-          preview: 'I am interested in your ergonomic chairs...',
-          time_ago: '2 minutes ago',
-        },
-        {
-          id: 2,
-          name: 'Sarah Johnson',
-          email: 'sarah@example.com',
-          subject: 'Delivery Question',
-          preview: 'When can you deliver to Dubai Marina?',
-          time_ago: '5 minutes ago',
-        },
-        {
-          id: 3,
-          name: 'Mike Davis',
-          email: 'mike@example.com',
-          subject: 'Quotation Request',
-          preview: 'Please send me a quote for 20 desks...',
-          time_ago: '10 minutes ago',
-        }
-      ]);
+      if (error.name === 'AbortError') {
+        console.warn('⚠️ Recent messages request timed out');
+      } else {
+        console.error('Error fetching recent messages:', error);
+      }
+      // Don't set fallback data in production
+      if (process.env.NODE_ENV === 'development') {
+        setRecentMessages([]);
+      }
     } finally {
       setLoading(false);
     }
@@ -98,11 +132,18 @@ const NotificationsBell = ({ className = '' }) => {
 
   // Initialize component
   useEffect(() => {
-    fetchUnreadCount();
+    // Only fetch if user is authenticated admin
+    if (authStorage.isAuthenticatedAdmin()) {
+      fetchUnreadCount();
+    }
     setInitialized(true);
     
-    // Set up polling for unread count every 30 seconds
-    const interval = setInterval(fetchUnreadCount, 30000);
+    // Set up polling for unread count every 60 seconds (reduced frequency)
+    const interval = setInterval(() => {
+      if (authStorage.isAuthenticatedAdmin()) {
+        fetchUnreadCount();
+      }
+    }, 60000);
     return () => clearInterval(interval);
   }, []);
 
@@ -141,12 +182,17 @@ const NotificationsBell = ({ className = '' }) => {
     return (
       <div className={`relative ${className}`}>
         <button className="text-gray-700 p-2 rounded-lg">
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-5 5v-5zM11 19H6a2 2 0 01-2-2V7a2 2 0 012-2h5m5 0v5" />
+          <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 256 256">
+            <path d="M220.07,176.94C214.41,167.2,206,139.73,206,104a78,78,0,1,0-156,0c0,35.74-8.42,63.2-14.08,72.94A14,14,0,0,0,48,198H90.48a38,38,0,0,0,75,0H208a14,14,0,0,0,12.06-21.06ZM128,218a26,26,0,0,1-25.29-20h50.58A26,26,0,0,1,128,218Zm81.71-33a1.9,1.9,0,0,1-1.7,1H48a1.9,1.9,0,0,1-1.7-1,2,2,0,0,1,0-2C53.87,170,62,139.69,62,104a66,66,0,1,1,132,0c0,35.68,8.14,65.95,15.71,79A2,2,0,0,1,209.71,185Z" />
           </svg>
         </button>
       </div>
     );
+  }
+
+  // Don't render if user is not authenticated admin
+  if (!authStorage.isAuthenticatedAdmin()) {
+    return null;
   }
 
   return (
@@ -159,16 +205,10 @@ const NotificationsBell = ({ className = '' }) => {
         {/* Bell Icon */}
         <svg 
           className="w-6 h-6" 
-          fill="none" 
-          stroke="currentColor" 
-          viewBox="0 0 24 24"
+          fill="currentColor" 
+          viewBox="0 0 256 256"
         >
-          <path 
-            strokeLinecap="round" 
-            strokeLinejoin="round" 
-            strokeWidth={2} 
-            d="M15 17h5l-5 5v-5zM11 19H6a2 2 0 01-2-2V7a2 2 0 012-2h5m5 0v5" 
-          />
+          <path d="M220.07,176.94C214.41,167.2,206,139.73,206,104a78,78,0,1,0-156,0c0,35.74-8.42,63.2-14.08,72.94A14,14,0,0,0,48,198H90.48a38,38,0,0,0,75,0H208a14,14,0,0,0,12.06-21.06ZM128,218a26,26,0,0,1-25.29-20h50.58A26,26,0,0,1,128,218Zm81.71-33a1.9,1.9,0,0,1-1.7,1H48a1.9,1.9,0,0,1-1.7-1,2,2,0,0,1,0-2C53.87,170,62,139.69,62,104a66,66,0,1,1,132,0c0,35.68,8.14,65.95,15.71,79A2,2,0,0,1,209.71,185Z" />
         </svg>
         
         {/* Count Badge */}

@@ -11,11 +11,13 @@ export default function Contact() {
     fullName: '',
     email: '',
     contactNumber: '',
+    subject: '',
     questions: '',
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null); // 'success', 'error', null
+  const [validationErrors, setValidationErrors] = useState({});
 
   const handleOpenForm = () => {
     setShowForm(true);
@@ -27,10 +29,12 @@ export default function Contact() {
       fullName: '',
       email: '',
       contactNumber: '',
+      subject: '',
       questions: '',
       message: ''
     });
     setSelectedFiles([]);
+    setValidationErrors({});
   };
 
   const handleInputChange = (e) => {
@@ -39,6 +43,14 @@ export default function Contact() {
       ...prev,
       [name]: value
     }));
+    
+    // Clear validation error for this field when user starts typing
+    if (validationErrors[name]) {
+      setValidationErrors(prev => ({
+        ...prev,
+        [name]: null
+      }));
+    }
   };
 
   const handleFileChange = (e) => {
@@ -49,24 +61,25 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Simple form validation
-    if (!formData.fullName || !formData.email || !formData.contactNumber) {
-      alert('Please fill in all required fields.');
+    // Simple form validation - check required fields that match backend validation
+    if (!formData.fullName || !formData.email || !formData.subject || !formData.message) {
+      alert('Please fill in all required fields (marked with *).');
       return;
     }
 
     setIsSubmitting(true);
     setSubmitStatus(null);
+    setValidationErrors({});
 
     try {
       // Prepare data for API (map frontend fields to backend fields)
       const apiData = {
         name: formData.fullName,
         email: formData.email,
-        contact_number: formData.contactNumber,
-        subject: formData.questions || 'General Inquiry', // Use questions as subject or default
+        contact_number: formData.contactNumber || null,
+        subject: formData.subject,
         message: formData.message,
-        questions: formData.questions
+        questions: formData.questions || null
       };
 
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api'}/contact`, {
@@ -88,6 +101,10 @@ export default function Contact() {
           setSubmitStatus(null);
         }, 3000);
       } else {
+        // Handle validation errors from backend
+        if (result.errors) {
+          setValidationErrors(result.errors);
+        }
         throw new Error(result.message || 'Failed to send message');
       }
     } catch (error) {
@@ -127,14 +144,17 @@ export default function Contact() {
         {showForm && (
           <section className="py-16 px-4 bg-gray-50 min-h-screen">
             <div className="max-w-6xl mx-auto">
-              <h2 className="text-3xl font-medium text-gray-800 mb-8">General Inquiry Contact Form</h2>
+              <h2 className="text-3xl font-medium text-gray-800 mb-4">General Inquiry Contact Form</h2>
+              <p className="text-gray-600 mb-8">
+                Fields marked with <span className="text-red-500">*</span> are required.
+              </p>
               
               <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* Left Column */}
                 <div className="space-y-6">
                   <div className="form-field">
                     <label className="block mb-2 font-medium text-gray-600" htmlFor="fullName">
-                      Full Name
+                      Full Name <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="text"
@@ -142,14 +162,17 @@ export default function Contact() {
                       name="fullName"
                       value={formData.fullName}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-3 border-2 border-gray-300 focus:border-yellow-400 focus:outline-none transition-colors duration-300"
+                      className={`w-full px-3 py-3 border-2 ${validationErrors.name ? 'border-red-500' : 'border-gray-300'} focus:border-yellow-400 focus:outline-none transition-colors duration-300`}
                       required
                     />
+                    {validationErrors.name && (
+                      <p className="text-red-500 text-sm mt-1">{validationErrors.name[0]}</p>
+                    )}
                   </div>
                   
                   <div className="form-field">
                     <label className="block mb-2 font-medium text-gray-600" htmlFor="email">
-                      Email
+                      Email <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="email"
@@ -157,9 +180,12 @@ export default function Contact() {
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      className="w-full px-3 py-3 border-2 border-gray-300 focus:border-yellow-400 focus:outline-none transition-colors duration-300"
+                      className={`w-full px-3 py-3 border-2 ${validationErrors.email ? 'border-red-500' : 'border-gray-300'} focus:border-yellow-400 focus:outline-none transition-colors duration-300`}
                       required
                     />
+                    {validationErrors.email && (
+                      <p className="text-red-500 text-sm mt-1">{validationErrors.email[0]}</p>
+                    )}
                   </div>
                   
                   <div className="form-field">
@@ -173,8 +199,25 @@ export default function Contact() {
                       value={formData.contactNumber}
                       onChange={handleInputChange}
                       className="w-full px-3 py-3 border-2 border-gray-300 focus:border-yellow-400 focus:outline-none transition-colors duration-300"
+                    />
+                  </div>
+                  
+                  <div className="form-field">
+                    <label className="block mb-2 font-medium text-gray-600" htmlFor="subject">
+                      Subject <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="subject"
+                      name="subject"
+                      value={formData.subject}
+                      onChange={handleInputChange}
+                      className={`w-full px-3 py-3 border-2 ${validationErrors.subject ? 'border-red-500' : 'border-gray-300'} focus:border-yellow-400 focus:outline-none transition-colors duration-300`}
                       required
                     />
+                    {validationErrors.subject && (
+                      <p className="text-red-500 text-sm mt-1">{validationErrors.subject[0]}</p>
+                    )}
                   </div>
                   
                   <div className="form-field">
@@ -196,7 +239,7 @@ export default function Contact() {
                 <div className="space-y-6">
                   <div className="form-field">
                     <label className="block mb-2 font-medium text-gray-600" htmlFor="message">
-                      Message
+                      Message <span className="text-red-500">*</span>
                     </label>
                     <textarea
                       id="message"
@@ -204,8 +247,12 @@ export default function Contact() {
                       value={formData.message}
                       onChange={handleInputChange}
                       rows="5"
-                      className="w-full px-3 py-3 border-2 border-gray-300 focus:border-yellow-400 focus:outline-none transition-colors duration-300 min-h-32 resize-vertical"
+                      className={`w-full px-3 py-3 border-2 ${validationErrors.message ? 'border-red-500' : 'border-gray-300'} focus:border-yellow-400 focus:outline-none transition-colors duration-300 min-h-32 resize-vertical`}
+                      required
                     />
+                    {validationErrors.message && (
+                      <p className="text-red-500 text-sm mt-1">{validationErrors.message[0]}</p>
+                    )}
                   </div>
                   
                   <div className="form-field">

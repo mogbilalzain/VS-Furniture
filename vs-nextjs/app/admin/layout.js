@@ -533,33 +533,7 @@ export default function AdminLayout({ children }) {
             <i className="fas fa-question-circle" style={{ width: '20px', marginRight: '0.75rem' }}></i>
             Help
           </Link>
-          
-          <Link href="/admin/test-auth" style={{
-            display: 'flex',
-            alignItems: 'center',
-            padding: '0.75rem 1rem',
-            color: pathname === '/admin/test-auth' ? '#FFD700' : '#cbd5e1',
-            textDecoration: 'none',
-            transition: 'all 0.3s ease',
-            borderRadius: '8px',
-            margin: '0.25rem 0.5rem',
-            backgroundColor: pathname === '/admin/test-auth' ? 'rgba(255, 215, 0, 0.1)' : 'transparent'
-          }}
-          onMouseEnter={(e) => {
-            if (pathname !== '/admin/test-auth') {
-              e.target.style.backgroundColor = 'rgba(255, 215, 0, 0.1)'
-              e.target.style.color = '#FFD700'
-            }
-          }}
-          onMouseLeave={(e) => {
-            if (pathname !== '/admin/test-auth') {
-              e.target.style.backgroundColor = 'transparent'
-              e.target.style.color = '#cbd5e1'
-            }
-          }}>
-            <i className="fas fa-shield-alt" style={{ width: '20px', marginRight: '0.75rem' }}></i>
-            Test Auth
-          </Link>
+         
         </nav>
       </div>
 
@@ -610,15 +584,34 @@ export default function AdminLayout({ children }) {
                 alignItems: 'center',
                 gap: '0.5rem'
               }}>
-                <img 
-                  src="https://via.placeholder.com/40x40" 
-                  alt="Admin" 
+                <div 
                   style={{
                     width: '40px',
                     height: '40px',
-                    borderRadius: '50%'
+                    borderRadius: '50%',
+                    backgroundColor: '#f3f4f6',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    border: '2px solid #e5e7eb',
+                    cursor: 'pointer',
+                    transition: 'all 0.3s ease'
                   }}
-                />
+                  onMouseEnter={(e) => {
+                    e.target.style.backgroundColor = '#FFD700'
+                    e.target.style.borderColor = '#FFD700'
+                    e.target.querySelector('svg').style.fill = '#ffffff'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.backgroundColor = '#f3f4f6'
+                    e.target.style.borderColor = '#e5e7eb'
+                    e.target.querySelector('svg').style.fill = '#6b7280'
+                  }}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#6b7280" viewBox="0 0 256 256" style={{ transition: 'fill 0.3s ease' }}>
+                    <path d="M229.19,213c-15.81-27.32-40.63-46.49-69.47-54.62a70,70,0,1,0-63.44,0C67.44,166.5,42.62,185.67,26.81,213a6,6,0,1,0,10.38,6C56.4,185.81,90.34,166,128,166s71.6,19.81,90.81,53a6,6,0,1,0,10.38-6ZM70,96a58,58,0,1,1,58,58A58.07,58.07,0,0,1,70,96Z"></path>
+                  </svg>
+                </div>
                 <span style={{
                   color: '#374151',
                   fontWeight: 500

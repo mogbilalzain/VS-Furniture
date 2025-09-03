@@ -287,20 +287,20 @@ export default function CategoryProducts() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left Illustration */}
-            <div className="relative bg-gray-50 p-8 rounded-lg">
-              <div className="text-center">
+            {/* <div className="relative bg-gray-50 p-8 rounded-lg">
+              <div className="text-center"> */}
                 {/* Simple illustration placeholder */}
-                <div className="w-full h-64 bg-gray-200 rounded-lg flex items-center justify-center">
+                {/* <div className="w-full h-64 bg-gray-200 rounded-lg flex items-center justify-center">
                   <svg className="w-32 h-32 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M20 6H4c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 10H4V8h16v8z"/>
                   </svg>
                 </div>
                 <p className="mt-4 text-sm text-gray-500">Illustration showing adaptable desk sizes</p>
               </div>
-            </div>
+            </div> */}
             
             {/* Right Content */}
-            <div>
+            {/* <div>
               <h2 className="text-3xl font-light text-gray-900 mb-6">
                 Sized to Support Every Student
               </h2>
@@ -315,7 +315,7 @@ export default function CategoryProducts() {
                 </svg>
                 GO TO SIZE GUIDE
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
@@ -400,7 +400,7 @@ export default function CategoryProducts() {
                   className="border border-gray-300 hover:bg-gray-50 text-gray-700 font-medium py-2 px-4 rounded-full transition-colors"
                 >
                   <option value="name">Sort by Name</option>
-                  <option value="price">Sort by Price</option>
+                  {/* <option value="price">Sort by Price</option> */}
                   <option value="newest">Sort by Newest</option>
                 </select>
               </div>

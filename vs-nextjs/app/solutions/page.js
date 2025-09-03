@@ -145,34 +145,50 @@ const SolutionsPage = () => {
       <Header />
       
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-gray-50 to-gray-100 py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Our Solutions
-            </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-              Discover innovative furniture solutions designed to transform your workspace, 
-              enhance productivity, and create inspiring environments for every need.
-            </p>
-            
-            {/* Search Bar */}
-            <div className="max-w-md mx-auto">
-              <div className="relative">
-                <input
-                  type="text"
-                  placeholder="Search solutions..."
-                  value={searchTerm}
-                  onChange={handleSearch}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                  </svg>
-                </div>
+      <section className="mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-20 items-center min-h-screen" style={{maxWidth: '87rem'}}>
+        <div className="md:pr-10 md:order-1 order-2 md:text-left text-center">
+          <span className="inline-block bg-gray-100 text-gray-500 px-3 py-1 rounded text-xs font-medium uppercase tracking-wider mb-6 animate-fade-up">
+            Explore
+          </span>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-normal leading-none mb-6 text-gray-900 animate-fade-up-delay-1">
+            <strong className="font-bold">Solutions</strong><br />
+            <em className="italic text-gray-600">Designed</em> by VS
+          </h1>
+          <p className="text-xl text-gray-600 font-normal leading-relaxed animate-fade-up-delay-2">
+            Innovative furniture solutions for every space
+          </p>
+          
+          {/* Search Bar */}
+          <div className="max-w-md mx-auto md:mx-0 mt-8">
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Search solutions..."
+                value={searchTerm}
+                onChange={handleSearch}
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
               </div>
             </div>
+          </div>
+        </div>
+        
+        <div className="md:order-2 order-1 relative">
+          <div className="relative overflow-hidden" style={{paddingBottom: '100%'}}>
+            <Image
+              src="/images/solutions/covers/VSIMC_homepage_overview.webp"
+              alt="VS Solutions - Furniture Overview"
+              fill
+              className="object-cover animate-fade-up-delay-3"
+              priority
+              onError={(e) => {
+                e.target.src = '/images/placeholder-product.jpg';
+              }}
+            />
           </div>
         </div>
       </section>
@@ -221,7 +237,7 @@ const SolutionsPage = () => {
                 const colSpan = isLarge ? 'md:col-span-2' : 'md:col-span-1';
                 
                 return (
-                  <div key={solution.id} className={`${colSpan} bg-white rounded-lg overflow-hidden shadow-sm flex flex-col hover:shadow-md transition-shadow duration-300`}>
+                  <div key={solution.id} className={`${colSpan} bg-white rounded-lg overflow-hidden flex flex-col hover:shadow-md transition-shadow duration-300`}>
                     {/* Image */}
                     <div className="relative">
                       <span className="absolute top-3 left-3 bg-gray-100 text-gray-600 text-xs px-3 py-1 rounded-full z-10">
@@ -239,7 +255,7 @@ const SolutionsPage = () => {
                     {/* Content */}
                     <div className="p-6 flex flex-col flex-1">
                       <h2 className="text-xl font-bold mb-3">{solution.title}</h2>
-                      <p className="text-gray-600 text-sm leading-relaxed flex-1">
+                      <p className="text-gray-600 text-sm leading-relaxed">
                         {solution.description ? 
                           (solution.description.length > (isLarge ? 200 : 150) ? 
                             solution.description.substring(0, isLarge ? 200 : 150) + '...' : 

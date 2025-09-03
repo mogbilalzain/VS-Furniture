@@ -93,7 +93,7 @@ const OurStoryPage = () => {
               {/* Right Image */}
               <div className="relative h-[400px] rounded-lg overflow-hidden shadow-xl transform hover:scale-105 transition-transform duration-300">
                 <Image
-                  src="/classroom-design.jpg"
+                  src="/images/solutions/covers/VSIMC_homepage_overview.webp"
                   alt="Modern classroom with VS furniture showcasing our design philosophy"
                   fill
                   className="object-cover"
@@ -133,11 +133,81 @@ const OurStoryPage = () => {
             </p>
           </div>
 
-          {/* World Map Placeholder */}
-          <div className="relative h-[400px] bg-gray-200 rounded-lg mb-12">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <p className="text-gray-500">VS LOCATIONS MAP</p>
+          {/* World Map with VS Locations */}
+          <div className="relative h-[400px] bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg mb-12 overflow-hidden">
+            {/* Background Pattern */}
+            <div className="absolute inset-0 opacity-10">
+              <svg className="w-full h-full" viewBox="0 0 800 400" fill="none">
+                <defs>
+                  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#3b82f6" strokeWidth="1"/>
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#grid)" />
+              </svg>
             </div>
+            
+            {/* VS Locations */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                {/* Germany */}
+                <div className="flex flex-col items-center">
+                  <div className="w-12 h-12 bg-[#FFD700] rounded-full flex items-center justify-center mb-2 shadow-lg">
+                    <svg className="w-6 h-6 text-gray-800" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <h3 className="font-semibold text-gray-800">Germany</h3>
+                  <p className="text-sm text-gray-600">Headquarters</p>
+                </div>
+                
+                {/* UAE */}
+                <div className="flex flex-col items-center">
+                  <div className="w-12 h-12 bg-[#FFD700] rounded-full flex items-center justify-center mb-2 shadow-lg">
+                    <svg className="w-6 h-6 text-gray-800" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <h3 className="font-semibold text-gray-800">UAE</h3>
+                  <p className="text-sm text-gray-600">Middle East HQ</p>
+                </div>
+                
+                {/* USA */}
+                <div className="flex flex-col items-center">
+                  <div className="w-12 h-12 bg-[#FFD700] rounded-full flex items-center justify-center mb-2 shadow-lg">
+                    <svg className="w-6 h-6 text-gray-800" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <h3 className="font-semibold text-gray-800">USA</h3>
+                  <p className="text-sm text-gray-600">Americas</p>
+                </div>
+                
+                {/* Saudi Arabia */}
+                <div className="flex flex-col items-center">
+                  <div className="w-12 h-12 bg-orange-400 rounded-full flex items-center justify-center mb-2 shadow-lg">
+                    <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <h3 className="font-semibold text-gray-800">Saudi Arabia</h3>
+                  <p className="text-sm text-orange-600">Coming Soon</p>
+                </div>
+              </div>
+            </div>
+            
+            {/* Connecting Lines */}
+            <svg className="absolute inset-0 w-full h-full pointer-events-none">
+              <defs>
+                <linearGradient id="connectionGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" style={{stopColor:'#FFD700', stopOpacity:0.3}} />
+                  <stop offset="100%" style={{stopColor:'#FFD700', stopOpacity:0.1}} />
+                </linearGradient>
+              </defs>
+              <path d="M 200 200 Q 400 150 600 200" stroke="url(#connectionGradient)" strokeWidth="2" fill="none" strokeDasharray="5,5">
+                <animate attributeName="stroke-dashoffset" values="0;10" dur="2s" repeatCount="indefinite"/>
+              </path>
+            </svg>
           </div>
         </div>
       </section>
@@ -180,17 +250,21 @@ const OurStoryPage = () => {
       </section>
 
       {/* Mission Statement */}
-      <section className="quote-section quote-section-enhanced text-white py-16 md:py-24 text-center px-4 min-h-[60vh] flex items-center justify-center relative">
+      <section className="quote-section quote-section-enhanced text-white py-16 md:py-24 text-center px-4 min-h-[60vh] flex items-center justify-center relative bg-gradient-to-br from-gray-800 via-gray-900 to-black">
         {/* Icon at the top */}
         <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10" style={{ top: "-3rem" }}>
           <div className="w-24 h-24 bg-[#FFD700] rounded-full flex items-center justify-center shadow-lg">
-            <i className="fas fa-lightbulb text-[#2c2c2c] text-3xl"></i>
+            <svg className="w-10 h-10 text-gray-800" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1h4v1a2 2 0 11-4 0zM12 14c.015-.34.208-.646.477-.859a4 4 0 10-4.954 0c.27.213.462.519.477.859h4z" />
+            </svg>
           </div>
         </div>
         {/* Animated background elements */}
-        <div className="bg-element"></div>
-        <div className="bg-element"></div>
-        <div className="bg-element"></div>
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-10 left-10 w-32 h-32 bg-[#FFD700] rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-10 right-10 w-24 h-24 bg-blue-500 rounded-full blur-2xl animate-pulse" style={{animationDelay: '1s'}}></div>
+          <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-purple-500 rounded-full blur-xl animate-pulse" style={{animationDelay: '2s'}}></div>
+        </div>
         
         <div className="container mx-auto max-w-4xl quote-content">
           <p className="text-3xl md:text-4xl italic font-normal leading-relaxed quote-enhanced-text">

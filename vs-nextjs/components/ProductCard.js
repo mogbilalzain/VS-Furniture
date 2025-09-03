@@ -7,13 +7,8 @@ const ProductCard = ({ product, showProperties = true, className = "" }) => {
     e.target.src = '/images/placeholder-product.jpg';
   };
 
-  // Mock color variants (since not in product data)
-  const colorVariants = [
-    { color: '#8B5A2B', image: '/products/variant1.jpg' },
-    { color: '#D4AF37', image: '/products/variant2.jpg' },
-    { color: '#C0C0C0', image: '/products/variant3.jpg' },
-    { color: '#DAA520', image: '/products/variant4.jpg' }
-  ];
+  // Get product images (limit to 4 for display)
+  const productImages = product.images ? product.images.slice(0, 4) : [];
 
   return (
     <div className={`bg-white border border-gray-200 hover:shadow-lg transition-all duration-300 overflow-hidden group ${className}`}>
@@ -35,16 +30,35 @@ const ProductCard = ({ product, showProperties = true, className = "" }) => {
           />
         </Link>
 
-        {/* Color Variants */}
-        <div className="absolute bottom-3 left-3 flex space-x-2">
-          {colorVariants.slice(0, 4).map((variant, index) => (
-            <div
-              key={index}
-              className="w-6 h-6 border-2 border-white shadow-sm cursor-pointer hover:scale-110 transition-transform"
-              style={{ backgroundColor: variant.color }}
-            />
-          ))}
-        </div>
+        {/* Product Images - Small thumbnails in bottom left */}
+        {productImages.length > 0 && (
+          <div className="absolute bottom-3 left-3 flex space-x-2">
+            {productImages.map((image, index) => (
+              <div
+                key={image.id || index}
+                className="w-6 h-6 border-2 border-white shadow-sm cursor-pointer hover:scale-110 transition-transform rounded-sm overflow-hidden bg-white"
+                title={image.alt_text || image.title || `Image ${index + 1}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  // Could add image preview functionality here
+                }}
+              >
+                <img
+                  src={image.image_url}
+                  alt={image.alt_text || `Product image ${index + 1}`}
+                  onError={handleImageError}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            ))}
+            {product.images && product.images.length > 4 && (
+              <div className="w-6 h-6 border-2 border-white shadow-sm rounded-sm bg-gray-800 text-white text-xs flex items-center justify-center font-bold">
+                +{product.images.length - 4}
+              </div>
+            )}
+          </div>
+        )}
       </div>
       
       {/* Product Info */}

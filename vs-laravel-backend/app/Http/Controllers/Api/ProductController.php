@@ -124,7 +124,7 @@ class ProductController extends Controller
                 $query->orderBy('name');
         }
 
-        $products = $query->with(['category', 'propertyValues.categoryProperty'])->paginate($request->get('limit', 10));
+        $products = $query->with(['category', 'propertyValues.categoryProperty', 'activeImages'])->paginate($request->get('limit', 10));
 
         return response()->json([
             'success' => true,
@@ -175,7 +175,7 @@ class ProductController extends Controller
 
         return response()->json([
             'success' => true,
-            'data' => new ProductResource($product->load('category'))
+            'data' => new ProductResource($product->load(['category', 'activeImages']))
         ]);
     }
 

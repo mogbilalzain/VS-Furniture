@@ -11,6 +11,20 @@ export const useDashboardStats = () => {
 };
 
 /**
+ * Hook for dashboard content analytics
+ */
+export const useDashboardContentAnalytics = () => {
+  return useApi(dashboardAPI.getContentAnalytics);
+};
+
+/**
+ * Hook for dashboard charts data
+ */
+export const useDashboardChartsData = () => {
+  return useApi(dashboardAPI.getChartsData);
+};
+
+/**
  * Hook for contact statistics
  */
 export const useContactStats = () => {

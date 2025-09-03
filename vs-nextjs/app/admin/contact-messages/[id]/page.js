@@ -32,12 +32,23 @@ export default function ContactMessageDetailsPage() {
       setLoading(true);
       setError('');
 
+      // Check if user is authenticated admin using authStorage
+      if (!authStorage.isAuthenticatedAdmin()) {
+        throw new Error('Authentication required. Please login again.');
+      }
+
+      // Get token using authStorage
+      const token = authStorage.getToken();
+      if (!token) {
+        throw new Error('No authentication token found. Please login again.');
+      }
+
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api'}/contact/${params.id}`, {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('admin_token')}`,
+          'Authorization': `Bearer ${token}`,
         },
       });
 
@@ -82,12 +93,20 @@ export default function ContactMessageDetailsPage() {
 
   const updateMessageStatus = async (newStatus) => {
     try {
+      // Get token using authStorage
+      const token = authStorage.getToken();
+      if (!token) {
+        alert('Authentication required. Please login again.');
+        router.replace('/admin/login');
+        return;
+      }
+
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api'}/contact/${params.id}/status`, {
         method: 'PATCH',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('admin_token')}`,
+          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify({ status: newStatus })
       });
@@ -128,12 +147,20 @@ export default function ContactMessageDetailsPage() {
     }
 
     try {
+      // Get token using authStorage
+      const token = authStorage.getToken();
+      if (!token) {
+        alert('Authentication required. Please login again.');
+        router.replace('/admin/login');
+        return;
+      }
+
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api'}/contact/${params.id}`, {
         method: 'DELETE',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('admin_token')}`,
+          'Authorization': `Bearer ${token}`,
         },
       });
 

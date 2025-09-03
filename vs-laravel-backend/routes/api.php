@@ -18,6 +18,7 @@ use App\Http\Controllers\Api\MaterialController;
 use App\Http\Controllers\Api\ProductMaterialController;
 use App\Http\Controllers\Api\SolutionController;
 use App\Http\Controllers\Api\HomepageContentController;
+use App\Http\Controllers\Api\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -153,20 +154,9 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/products/{product}/filters', [FilterController::class, 'associateProductFilters']);
         
         // Dashboard
-        Route::get('/dashboard/stats', function () {
-            return response()->json([
-                'success' => true,
-                'data' => [
-                    'totalProducts' => \App\Models\Product::active()->count(),
-                    'totalOrders' => \App\Models\Order::count(),
-                    'totalRevenue' => \App\Models\Order::where('status', 'delivered')->sum('total_amount'),
-                    'totalCustomers' => \App\Models\Order::distinct('customer_email')->count(),
-                    'recentProducts' => \App\Models\Product::with('category')->active()->latest()->take(5)->get(),
-                    'recentOrders' => \App\Models\Order::latest()->take(5)->get(),
-                    'recentMessages' => \App\Models\ContactMessage::latest()->take(5)->get(),
-                ]
-            ]);
-        });
+        Route::get('/dashboard/stats', [DashboardController::class, 'getStats']);
+        Route::get('/dashboard/content-analytics', [DashboardController::class, 'getContentAnalytics']);
+        Route::get('/dashboard/charts-data', [DashboardController::class, 'getChartsData']);
         
         // Admin Certifications routes
         Route::apiResource('admin/certifications', CertificationController::class)->except(['index']);

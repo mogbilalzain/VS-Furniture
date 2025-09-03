@@ -38,8 +38,13 @@ export default function ContactMessagesPage() {
       setLoading(true);
       setError('');
 
-      // Check if token exists
-      const token = localStorage.getItem('admin_token');
+      // Check if user is authenticated admin using authStorage
+      if (!authStorage.isAuthenticatedAdmin()) {
+        throw new Error('No authentication token found. Please login again.');
+      }
+
+      // Get token using authStorage
+      const token = authStorage.getToken();
       if (!token) {
         throw new Error('No authentication token found. Please login again.');
       }
@@ -140,7 +145,14 @@ export default function ContactMessagesPage() {
 
   const loadStats = async () => {
     try {
-      const token = localStorage.getItem('admin_token');
+      // Check if user is authenticated admin using authStorage
+      if (!authStorage.isAuthenticatedAdmin()) {
+        console.warn('⚠️ User not authenticated admin for stats request');
+        return;
+      }
+
+      // Get token using authStorage
+      const token = authStorage.getToken();
       if (!token) {
         console.warn('⚠️ No token found for stats request');
         return;
@@ -175,7 +187,15 @@ export default function ContactMessagesPage() {
 
   const updateMessageStatus = async (messageId, newStatus) => {
     try {
-      const token = localStorage.getItem('admin_token');
+      // Check if user is authenticated admin using authStorage
+      if (!authStorage.isAuthenticatedAdmin()) {
+        alert('Authentication required. Please login again.');
+        router.replace('/admin/login');
+        return;
+      }
+
+      // Get token using authStorage
+      const token = authStorage.getToken();
       if (!token) {
         alert('Authentication required. Please login again.');
         router.replace('/admin/login');
@@ -211,7 +231,15 @@ export default function ContactMessagesPage() {
     }
 
     try {
-      const token = localStorage.getItem('admin_token');
+      // Check if user is authenticated admin using authStorage
+      if (!authStorage.isAuthenticatedAdmin()) {
+        alert('Authentication required. Please login again.');
+        router.replace('/admin/login');
+        return;
+      }
+
+      // Get token using authStorage
+      const token = authStorage.getToken();
       if (!token) {
         alert('Authentication required. Please login again.');
         router.replace('/admin/login');

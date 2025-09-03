@@ -105,7 +105,8 @@ const ProductsGrid = ({
           <p className="text-gray-600">
             {pagination && pagination.total ? (
               <>
-                Showing {((Number(pagination.current_page) - 1) * Number(pagination.per_page)) + 1} - {Math.min(Number(pagination.current_page) * Number(pagination.per_page), Number(pagination.total))} of {Number(pagination.total)} products
+                Showing of {Number(pagination.total)} products
+                {/* Showing {((Number(pagination.current_page) - 1) * Number(pagination.per_page)) + 1} - {Math.min(Number(pagination.current_page) * Number(pagination.per_page), Number(pagination.total))} of {Number(pagination.total)} products */}
               </>
             ) : (
               `${products.length} products`

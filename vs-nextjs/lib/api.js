@@ -673,6 +673,8 @@ export const filtersAPI = {
 // Dashboard API
 export const dashboardAPI = {
   getStats: () => apiClient.get('/dashboard/stats'),
+  getContentAnalytics: () => apiClient.get('/dashboard/content-analytics'),
+  getChartsData: () => apiClient.get('/dashboard/charts-data'),
 };
 
 // Certifications API
